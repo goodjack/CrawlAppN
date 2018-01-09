@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:lang="http://www.springframework.org/schema/lang" 
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:batch="http://www.springframework.org/schema/batch" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.eopcon.crawler.samsungcnt" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<import resource="./spring-db.xml" />
+	<!-- <import resource="./spring-sftp.xml"/> -->
+
+	<bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="properties" />
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:config/message/messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
+
+	<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="singleton" value="true" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="properties">
+			<props>
+				<prop key="prop">value</prop>
+			</props>
+		</property>
+		<property name="locations">
+			<list>
+				<value>classpath:config/properties/config.properties</value>
+				<value>classpath:config/properties/script.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+		<property name="transactionManager" ref="resourcelessTransactionManager" />
+	</bean>
+
+	<bean id="jobLogListener" class="com.eopcon.crawler.samsungcnt.listener.JobLogListener" />
+	<bean id="jobStepListener" class="com.eopcon.crawler.samsungcnt.listener.JobStepListener" />
+
+	<bean id="resourcelessTransactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<batch:job id="baseJob" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="jobLogListener" />
+		</batch:listeners>
+	</batch:job>
+
+	<batch:step id="baseStep" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="jobStepListener" />
+		</batch:listeners>
+	</batch:step>
+
+	<batch:job id="productJob" parent="baseJob">
+		<batch:step id="product.step.1" parent="baseStep" next="product.step.2">
+			<batch:tasklet transaction-manager="resourcelessTransactionManager" ref="productListTasklet" />
+		</batch:step>
+		<batch:step id="product.step.2" parent="baseStep">
+			<batch:tasklet transaction-manager="resourcelessTransactionManager" ref="productDetailTasklet" />
+		</batch:step>
+	</batch:job>
+
+	<bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor">
+		<property name="concurrencyLimit" value="5" />
+	</bean>
+
+	<bean class="org.springframework.batch.core.scope.StepScope" />
+
+</beans>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>javascript</comment>
+
+	<!-- UNIQLO -->
+	<entry key="script.uniqlo.imageInfo">
+        <![CDATA[
+        var getImages = function(url){
+        	var objs = {};
+        	for(var i=0; i < opt_list.length; i++){
+            	var optValCd = opt_list[i]['OPT_VAL_CD'];
+            	var valueType = opt_list[i]['VALUE_TYPE'];
+            	var val = opt_list[i]['OPT_TVAL'];
+            	
+            	if(valueType === 'OPT_1_TVAL'){
+            		 for(var j=0; j < itemImageInfo.length; j++){
+		            	if(optValCd === itemImageInfo[j]['opt_val']){
+		            		var imageUrl = itemImageInfo[j]['src_570'];
+		            		objs[val] = !/^http[s]?:.+$/gi.test(imageUrl) ? url + imageUrl : imageUrl;
+		            		break;
+		            	}
+		            }
+            	}
+            }
+            return JSON.stringify(objs);
+        };
+        ]]>
+	</entry>
+	
+	<entry key="script.uniqlo.optPriceInfo">
+        <![CDATA[
+        var getPrices = function(){
+        	var objs = {};
+        	
+            for(var i=0; i < opt_list.length; i++){
+            	var optValCd = opt_list[i]['OPT_VAL_CD'];
+            	var valueType = opt_list[i]['VALUE_TYPE'];
+            	var val = opt_list[i]['OPT_TVAL'];
+            	
+            	if(valueType === 'OPT_1_TVAL'){
+            		objs[val] = '0';
+            		for(var j=0; j < opt_tval.length; j++){
+            			if(opt_tval[j][0] === optValCd){
+            				objs[val] = opt_tval[j][2];
+            				break;
+            			}
+            		}
+            	}
+            }
+            return JSON.stringify(objs);
+        };
+ 		]]>
+	</entry>
+	
+	<entry key="script.uniqlo.itemInvQtyInfo">
+        <![CDATA[
+        var getColor = function(code){
+            for(var i=0; i < opt_list.length; i++){
+            	var optValCd = opt_list[i]['OPT_VAL_CD'];
+            	var valueType = opt_list[i]['VALUE_TYPE'];
+            	var val = opt_list[i]['OPT_TVAL'];
+            	
+            	if(optValCd === code && valueType === 'OPT_1_TVAL'){
+            		return val;
+            	}
+            }
+            return '';
+        };
+        
+        var getSize = function(code){
+            for(var i=0; i < opt_list.length; i++){
+            	var optValCd = opt_list[i]['OPT_VAL_CD'];
+            	var valueType = opt_list[i]['VALUE_TYPE'];
+            	var val = opt_list[i]['OPT_TVAL'];
+            	
+            	if(optValCd === code && valueType === 'OPT_2_TVAL'){
+            		return val;
+            	}
+            }
+            return '';
+        };
+        
+        var getItemInvQty = function(){
+        	var array = new Array();
+	        for(var i=0; i < itemInvQtyInfo.length; i++){
+	        	var itemSaleState = itemInvQtyInfo[i]['itemSaleState'];
+	        	
+	        	/* 10:판매중, 20:품절, 30:판매종료 */
+	        	if(itemSaleState === '10' || itemSaleState === '20'){ 
+		        	var color = getColor(itemInvQtyInfo[i]['color']);
+		        	var size = getSize(itemInvQtyInfo[i]['size']);
+		        	var qty = itemSaleState === '20' ? 0 : itemInvQtyInfo[i]['inv_qty'];
+		        	
+		        	array.push({color:color, size:size, qty:qty});
+	        	}
+	        }
+	        return array;
+        };
+        ]]>
+	</entry>
+
+</properties>

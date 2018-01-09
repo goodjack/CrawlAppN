@@ -1,0 +1,2188 @@
+<!doctype html>
+<html lang="ko">
+
+
+
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+	
+
+
+
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/common.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/layout.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/order.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/category.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/goods.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/shop.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/mypage.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/cs.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/wf.css" />
+	<link rel="stylesheet" type="text/css" href="/css/pcweb/md.css" />
+
+		    <link rel="stylesheet" type="text/css" href="/css/pcweb/main_mixxo.css" />
+
+	<link rel="shortcut icon" type="image/x-icon" href="//www.elandmall.com/images/pcweb/common/0000043.ico"/> 
+	
+	<script type="text/javascript" src="/common/js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/pcweb/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="/pcweb/js/ui.js"></script>
+	
+	<script type="text/javascript">
+	<!--
+		if ($.type(window.elandmall) != "object") {
+			window.elandmall = {};		
+		};
+		if ($.type(window.elandmall.global) != "object") {
+			window.elandmall.global = {};		
+		};
+		elandmall.global = {
+			scheme: "http",
+			image_path: "//www.elandmall.com",
+			upload_image_path: "//www.elandmall.com/upload",
+			js_path:"",
+			http_url:"http://mixxo.elandmall.com",
+			https_url:"https://secure.elandmall.com",
+			cookie_domain: ".elandmall.com",
+			base_domain_url:"//www.elandmall.com", 
+			http_domain_cookie_name: "pcweb_3_http_domain",
+			modernhouse_domain_url:"//modernhouse.elandmall.com",
+			disp_mall_no:"0000043",
+			ie_yn: "N",
+			oneclick_domain_url:"https://oneclick.elandretail.com",
+			ssl_domain_url:"https://secure.elandmall.com"
+			
+		};
+	//-->
+	</script>	
+	<script type="text/javascript" src="/common/js/overpass.common.js"></script>
+	<script type="text/javascript" src="/common/js/overpass.util.js"></script>
+	<script type="text/javascript" src="/common/js/overpass.elandmall.js"></script>
+	<script type="text/javascript" src="/common/js/overpass.goods.js"></script>
+	<script type="text/javascript" src="/common/js/overpass.login.base.js"></script>
+	<script type="text/javascript" src="/pcweb/js/elandmall.login.js"></script>
+	<script type="text/javascript" src="/pcweb/js/elandmall.popup.js"></script>
+	<script type="text/javascript" src="/pcweb/js/elandmall.pcweb.js"></script>	
+
+
+
+<!-- title변경하는 경우 해당 title명을 변경 처리 하면 됨 -->
+<title id="_HEADER_TITLE" data-ga_ctg_nm="CLOTHING">CLOTHING - [미쏘몰] for every women | ELAND MALL</title>  
+<meta name="title" content="CLOTHING - [미쏘몰] for every women" />
+<meta name="description" content="이랜드몰은 이랜드그룹 80여개 브랜드를 한곳에서 만나실 수 있는 라이프 쇼핑포털입니다. 패션, 외식, 유통, 호텔 레저까지 가격 거품 확 줄인 다양한 브랜드를 만나실 수 있습니다." />
+
+	<meta name="keywords" content="CLOTHING,Outer,Knit/Cardigan,Dress,Blouse/Shirts,Bottom,T-Shirt">
+
+
+<script type="text/javascript" src="/pcweb/js/idangerous.swiper.min.js"></script>
+<script type="text/javascript">
+	elandmall.popup.fnNotiPopList({ disp_mall_no : '0000043', noti_clss_cd : '105', rel_no:'1607300005'}); 
+<!--
+	//이곳에 스크립트/css 관련 내용을 삽입한다.
+//-->
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+	/* 인풋창에 placeholder 속성 모든 브라우저 통일 */
+	input:focus::-webkit-input-placeholder { /* WebKit browsers */
+	  color:transparent;
+	}
+	
+	input:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	  color:transparent;
+	}
+	
+	input:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+	  color:transparent;
+	}
+	
+	input:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+	  color:transparent;
+	}
+	/*IE8 고객센터 focus 문제*/
+		
+</style>
+<script type="text/javascript" src="/pcweb/js/idangerous.swiper.min.js"></script>
+<script type="text/javascript" src="/pcweb/js/ui.header.js"></script>
+<script type="text/javascript" src="/pcweb/js/elandmall.search.module.js"></script>
+<script type="text/javascript" src="/pcweb/js/elandmall.search.js"></script>
+
+
+
+<script type="text/javascript">
+    var lockLogin = false;
+    var lockLoginPop = false;
+
+	var fnCloseBtn = function(){
+		$(".catg_bt").focus();
+		$(".catg_lyr").hide();
+	}
+	
+	//카테고리 전체보기
+	getCtgList = function(){	
+		//최초 1회 view
+		if($.trim($("#catg_all").html()) == ""){
+			$("#catg_all").load("/dispctg/searchGnbAllCategoryList.action",function(){
+			});
+		}
+	}
+$(function() {
+	//인기검색어
+	var domainNo = 0;
+	domainNo = 43;
+	
+	var ppkUpAndDown = "";
+    $.ajax({
+		url: "//search.elandmall.com/ksf/api/rankings",
+		data: { domain_no: domainNo, max_count: 10 },
+		dataType: "jsonp",
+		success: function(data) {
+
+            $.each(data, function (i, v) {
+            	if(v[1] == 'new'){
+            		ppkUpAndDown = v[1];
+            	}else if(v[1] == 0){
+            		ppkUpAndDown = "-";
+            	}else if(v[1] > 0){
+            		ppkUpAndDown = "<span class=\"rl_up\">" + v[1] + "</span>";
+            	}else if(v[1] < 0){
+            		ppkUpAndDown = "<span class=\"rl_down\">" + Math.abs(v[1]) + "</span>";
+            	}
+           		$("#rankings").append("<li><a href=\"javascript:fnsearch.dftSchKwd('" + v[0] + "');\" class=\"d_links\"><em class=\"num\">" 
+			    						+ (i+1) + "</em><span>" + v[0] + "</span></a><div class=\"rl_pot\">" + ppkUpAndDown + "</div></li>");
+            });
+            if($("#rankings").children("li").length == 0){
+            	$("#rankings").append("<div class='msg' > 인기 검색어가 없습니다. </div>");
+            }
+        },
+        error: function () {
+           console.log("인기검색어 에러 발생");
+        }
+	});
+	
+	var domainNo = 0;				//자동완성 도메인번호
+	domainNo = 43;
+	
+	var akc_maxCount = 10; 			//자동완성 가져올 갯수
+	var akc_mode = "s"; 			//자동완성 모드 s: 전방일치
+	var akc_idx	= -1;				//자동완성 키 이벤트 관련 - down키 입력시 0부터 시작하기 위함
+	var akc_evt_key = 0;			//자동완성 이벤트 키
+	var akc_lst_len = 0;
+	
+	$(".d_searchTerm").on("keyup",function(e){
+		
+		//인풋창에 키워드가 존재할 경우
+		if(e.keyCode != 38 && e.keyCode != 40  && $.trim($(".d_searchTerm").val()) != ""){
+			//자동완성
+	        $.ajax({
+				type : "POST",
+				url : "//search.elandmall.com/ksf/api/suggest?target=complete",
+				dataType : "jsonp",
+				data: "&domain_no="+ domainNo +"&term="+encodeURIComponent($("#searchTerm").val())+"&max_count="+akc_maxCount+"&mode="+akc_mode,
+				success : function(data) {
+					if(data.suggestions == ""){
+						$("#sch_complete").children().first().html("<div class=\"msg\">입력하신 단어가 들어가 있는 추천어가 없습니다.</div>");
+					}else{
+						var temp_hilight = "";
+						var akc_html = "";
+						var akc_kwd = $.trim($("#searchTerm").val());
+			            $.each(data.suggestions, function(i, v){
+			            	$.each(v, function(index, value){
+			            		temp_hilight = value[0];
+			        			temp_hilight = temp_hilight.replace(akc_kwd,"<b>"+akc_kwd+"</b>");
+			            		akc_html += "<li id=\"akc" + index + "\">";
+			            		akc_html += "<a class=\"d_links\" href=\"javascript:fnsearch.dftSchKwd('" + value[0] + "');\"><span>" + temp_hilight + "</span></a>";
+			            		akc_html += "</li>";	
+			            	});
+						});
+			            $("#sch_complete").children().first().html(akc_html);
+						
+					}
+					//자동완성 리스트 만큼 li태그가 생김, 그 숫자를 카운트
+					akc_lst_len = $(".s_keyword").find("li").length;
+					//console.log("akc_lst_len = "+akc_lst_len);
+				},
+		        error : function(e) {
+		        	console.log("자동완성 처리중 장애가 발생하였습니다.");
+		        }
+			});
+		}
+		
+		// 키보드 이벤트 등록
+		if(e.keyCode == 38){		// up
+			akc_idx--;
+			if(akc_idx < 0) akc_idx = 0;
+			//console.log("akc_lst_len = "+akc_lst_len);
+			$("#searchTerm").val($('#akc'+akc_idx).children().children().text());
+		}else if(e.keyCode == 40){	// down
+			akc_idx++;
+			if(akc_idx > akc_lst_len-1) akc_idx = akc_lst_len-1;
+			//console.log("akc_lst_len = "+akc_lst_len);
+			$("#searchTerm").val($('#akc'+akc_idx).children().children().text());
+		}else{
+			akc_idx	= -1;
+		}
+	});
+	
+	//자동완성 리스트 끄기 버튼
+	$(".s_del > button").on("click", function(){
+		//$(".d_searchTerm").focus();
+		$(".d_sch_complete").hide();
+	});
+	
+	
+	isLoginCheckAjax = function(){	
+		$.ajax({
+			url:"/member/isLoginCheckAjax.action",
+			type:"get",
+			dataType:"json",
+			success: function(result){
+				if ( result.ret_code == true ) {
+					$("#dd_logout").show();
+					$("#dd_login").hide();
+					$("#dd_join").hide();
+				} else {
+					$("#dd_logout").hide();
+					$("#dd_login").show();
+					$("#dd_join").show();
+				}
+				
+			},
+			error:function(err){
+
+					$("#dd_logout").hide();
+					$("#dd_login").show();
+					$("#dd_join").show();
+
+			}
+		});
+		
+	}
+	
+	$(document).ready(function(){
+		isLoginCheckAjax();
+		
+		
+
+			$("#visit_on_div").hide();
+
+ 		//바로방문 ON 카운트 후 숨김
+		setTimeout(function() {
+			$("#visit_on_div").hide();			
+		},5000);
+ 		
+		$("#ddDirectOn").on("mouseover", function() {
+			$("#visit_on_div").show();
+			setTimeout(function() {
+				$("#visit_on_div").hide();			
+			},5000);
+		});
+	});
+
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-54802457-5', 'auto');
+  
+
+dataLayer = [{ 
+    'age':'',
+  	'gender':'',
+  	'custId':'',
+    'grade':'',
+  	'register_date':'',
+  	'login':'X', 
+  	'chnl_cd':'PC Web',
+  	'staff_yn':''
+  	}];
+
+</script>
+
+</head>
+<body>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-N7KDQF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N7KDQF');</script>
+<!-- End Google Tag Manager -->
+
+<!-- class="modern" -->
+	<!-- skip navigation -->
+	<div id="skipNav">
+		<a href="#content" onClick="document.getElementById('content').tabIndex = -1;document.getElementById('content').focus();return false;">컨텐츠바로가기</a>
+		<a href="#d_gnb" onClick="document.getElementById('header').tabIndex = -1;document.getElementById('header').focus();return false;">메뉴바로가기</a>
+	</div>
+	<!-- //skip navigation -->
+
+	<!-- wrapper -->
+
+    <div id="wrapper" class="mixxo">
+		    		
+		
+			<!-- BANNER -->
+
+			<!-- 비정형 영역 처리   -->
+			<!-- 
+	내 용 : 최상단 헤더 배너
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="header_top_banner" style="background:">
+
+			<div class="btn_hdtb_img">
+			<a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'Y',banner_kind_cd:'90' ,conts_form_cd:'130' ,conts_divi_cd:'10' ,conts_dist_no:'C17022809269263' ,sale_area_no:'D1607000724' , rel_divi_cd:'20' , rel_no:'170200000014749', move_cont_no:'', url:'http://mixxo.elandmall.com/shop/initNewGoods.action'})"><img src="//www.elandmall.com/upload/dspl/banner/90/074/00/170200000019074.jpg" width="1080" height="80" alt="뉴얼라이벌" /></a>
+			</div>
+
+			<a href="#" class="btn_hdtb_close">베너 닫기</a>
+			<a href="#" class="btn_hdtb_open">
+				<span class="ir">베너 열기</span>
+				OPEN
+			</a>
+		</div>
+		<script>
+		if($(".btn_hdtb_img a").size() > 0){
+			$(".btn_hdtb_img a").attr("data-ga-tag","PC_GNB||최상단배너||뉴얼라이벌");
+		}
+		
+			$(".btn_hdtb_close").on("click",function(){
+				$(".header_top_banner").removeClass("on");
+				$(".btn_hdtb_open").focus();
+				elandmall.util.setCookie({ name: "main_top_banner_0000043", value: "close", path: "/", domain : elandmall.global.cookie_domain });	//쿠키저장
+			});
+			
+			$(".btn_hdtb_open").on("click",function(){
+				$(".header_top_banner").addClass("on");
+				$(".btn_hdtb_img").focus();
+				elandmall.util.setCookie({ name: "main_top_banner_0000043", value: "open", path: "/", domain : elandmall.global.cookie_domain });	//쿠키저장
+			});
+
+			//기본 close(close값이 아니면 open 이벤트 한번 실행)
+			if(elandmall.util.getCookie("main_top_banner_0000043") != "close"){
+				$(".btn_hdtb_open").click();
+			}
+			
+		</script>
+ 
+
+			<!-- //비정형 영역 처리  -->
+			
+			<!-- //BANNER  -->		
+		
+		<!-- HEADER header_fix -->
+		<div id="header" class="header">
+			<div class="head">
+				<!-- LOGO -->
+				<h1>
+
+					<a href="javascript:;" onclick="javascript:elandmall.hdLink('MALL_MAIN');"><img src="//www.elandmall.com/images/pcweb/header/logo_mixxo.jpg" alt="MIXXO" /></a>    		
+
+
+				</h1>
+				<!-- //LOGO -->
+				
+
+				<!-- MALL TAB -->
+				<div class="hd_mall">
+					<div class="tit">
+
+						<a href="javascript:;" onclick="javascript:elandmall.hdLink('MALL_MAIN');" class="btn_home"><img src="//www.elandmall.com/images/pcweb/header/logo_mixxo_tab.png" alt="MIXXO" /></a>  		
+
+					</div>
+				</div>
+
+				<div class="mall_select">
+					<ul>
+						<li class="el"><a href="javascript:;" onclick="javascript:elandmall.hdLink('MAIN');" class="d_move_link" data-ga-tag='PC_GNB||상단탭||E-LAND MALL'>이랜드몰 <span class="ir">이동</span></a></li>
+						<li class="mh"><a href="javascript:;" onclick="javascript:elandmall.hdLink('MAIN_MODERN');" class="d_move_link" data-ga-tag='PC_GNB||상단탭||modernhouse'>모던하우스몰 <span class="ir">이동</span></a></li>
+					</ul>
+				</div>
+
+			<!-- 비정형 영역 처리   -->
+			<!--
+	내 용 : BARND SITE PC
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="bs_selectbox d_bs_sel">
+	<div class="bs_sel_tit"><a href="javascript:;"><span>BRAND SITE</span></a></div>
+	<div class="brand_select" id="gnb_brandmall_list">
+								
+		<ul id="_mall_brand_list">			
+
+			<li>
+				<a href="http://www.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 이랜드 통합몰'>
+				<span id="barnd_sel_170100000012789" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/332/00/170100000016332.jpg" alt="이랜드 통합몰" /></a>
+			</li>	
+
+			<li>
+				<a href="http://modernhouse.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 모던하우스'>
+				<span id="barnd_sel_170100000012792" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/336/00/170100000016336.jpg" alt="모던하우스" /></a>
+			</li>	
+
+			<li>
+				<a href="http://shoopen.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 슈펜'>
+				<span id="barnd_sel_170100000012794" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/338/00/170100000016338.jpg" alt="슈펜" /></a>
+			</li>	
+
+			<li>
+				<a href="http://folder.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 폴더'>
+				<span id="barnd_sel_170100000012795" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/339/00/170100000016339.jpg" alt="폴더" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000204" data-ga-tag='PC_GNB||상단탭||BRAND 뉴발란스 키즈'>
+				<span id="barnd_sel_170100000012796" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/340/00/170100000016340.jpg" alt="뉴발란스 키즈" /></a>
+			</li>	
+
+			<li>
+				<a href="http://nb.elandmall.com/main/initMain.action" data-ga-tag='PC_GNB||상단탭||BRAND 뉴발란스'>
+				<span id="barnd_sel_170100000012797" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/341/00/170100000016341.jpg" alt="뉴발란스" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000317" data-ga-tag='PC_GNB||상단탭||BRAND 2ME'>
+				<span id="barnd_sel_170100000012798" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/342/00/170100000016342.jpg" alt="2ME" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000150" data-ga-tag='PC_GNB||상단탭||BRAND 다스루켄'>
+				<span id="barnd_sel_170100000012799" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/343/00/170100000016343.jpg" alt="다스루켄" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000308" data-ga-tag='PC_GNB||상단탭||BRAND 티니위니'>
+				<span id="barnd_sel_170100000012800" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/344/00/170100000016344.jpg" alt="티니위니" /></a>
+			</li>	
+
+			<li>
+				<a href="http://whoau.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 후아유'>
+				<span id="barnd_sel_170100000012802" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/346/00/170100000016346.jpg" alt="후아유" /></a>
+			</li>	
+
+			<li>
+				<a href="http://spao.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 스파오'>
+				<span id="barnd_sel_170100000012804" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/348/00/170100000016348.jpg" alt="스파오" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000333" data-ga-tag='PC_GNB||상단탭||BRAND 클라비스'>
+				<span id="barnd_sel_170100000012805" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/349/00/170100000016349.jpg" alt="클라비스" /></a>
+			</li>	
+
+			<li>
+				<a href="http://roem.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 로엠'>
+				<span id="barnd_sel_170100000012806" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/350/00/170100000016350.jpg" alt="로엠" /></a>
+			</li>	
+
+			<li>
+				<a href="http://mixxo.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 미쏘'>
+				<span id="barnd_sel_170100000012807" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/351/00/170100000016351.jpg" alt="미쏘" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1600002580" data-ga-tag='PC_GNB||상단탭||BRAND ENC'>
+				<span id="barnd_sel_170100000012808" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/352/00/170100000016352.jpg" alt="ENC" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000322" data-ga-tag='PC_GNB||상단탭||BRAND 태창'>
+				<span id="barnd_sel_170100000012809" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/353/00/170100000016353.jpg" alt="태창" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000259" data-ga-tag='PC_GNB||상단탭||BRAND 헌트이너웨이'>
+				<span id="barnd_sel_170100000012810" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/354/00/170100000016354.jpg" alt="헌트이너웨이" /></a>
+			</li>	
+
+			<li>
+				<a href="http://eblin.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 에블린'>
+				<span id="barnd_sel_170100000012811" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/355/00/170100000016355.jpg" alt="에블린" /></a>
+			</li>	
+
+			<li>
+				<a href="http://clue.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 클루'>
+				<span id="barnd_sel_170100000012812" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/356/00/170100000016356.jpg" alt="클루" /></a>
+			</li>	
+
+			<li>
+				<a href="http://ost.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND OST'>
+				<span id="barnd_sel_170100000012813" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/357/00/170100000016357.jpg" alt="OST" /></a>
+			</li>	
+
+			<li>
+				<a href="http://lloyd.elandmall.com" data-ga-tag='PC_GNB||상단탭||BRAND 로이드'>
+				<span id="barnd_sel_170100000012814" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/358/00/170100000016358.jpg" alt="로이드" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1600002578" data-ga-tag='PC_GNB||상단탭||BRAND 라템'>
+				<span id="barnd_sel_170100000012815" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/359/00/170100000016359.jpg" alt="라템" /></a>
+			</li>	
+
+			<li>
+				<a href="http://modernhouse.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000240" data-ga-tag='PC_GNB||상단탭||BRAND 버터'>
+				<span id="barnd_sel_170100000012816" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/360/00/170100000016360.jpg" alt="버터" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1690000390" data-ga-tag='PC_GNB||상단탭||BRAND 켄싱턴'>
+				<span id="barnd_sel_170100000012818" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/362/00/170100000016362.jpg" alt="켄싱턴" /></a>
+			</li>	
+
+			<li>
+				<a href="http://www.elandmall.com/dispctg/initBrandShop.action?brand_no=1600002641" data-ga-tag='PC_GNB||상단탭||BRAND 켄싱턴 리조트'>
+				<span id="barnd_sel_170100000012819" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/363/00/170100000016363.png" alt="켄싱턴 리조트" /></a>
+			</li>	
+
+			<li>
+				<a href="/dispctg/initBrandShop.action?brand_no=1690000401" data-ga-tag='PC_GNB||상단탭||BRAND '>
+				<span id="barnd_sel_170200000013699" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/621/00/170200000017621.jpg" alt="" /></a>
+			</li>	
+
+			<li>
+				<a href="/dispctg/initBrandShop.action?brand_no=1690000362" data-ga-tag='PC_GNB||상단탭||BRAND '>
+				<span id="barnd_sel_170200000013700" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/622/00/170200000017622.jpg" alt="" /></a>
+			</li>	
+
+			<li>
+				<a href="/dispctg/initBrandShop.action?brand_no=1690000157" data-ga-tag='PC_GNB||상단탭||BRAND '>
+				<span id="barnd_sel_170200000013701" class="sel" style="display:none;"><em>브랜드선택됨</em></span>
+				<img src="//secure.elandmall.com/upload/dspl/banner/90/623/00/170200000017623.jpg" alt="" /></a>
+			</li>	
+
+		</ul>
+			
+		<div class="ldeco"></div>
+		<div class="rdeco"></div>
+	</div>
+</div>
+
+			<script>
+				$(document).ready(function(){					
+					function checkBrandSite(){
+						var brandShopPattern = /^http.+brand_no=[\d]+/;
+						var brandMallPattern = /^http.+(kr|com)/;
+						
+						var linkDomain = "";
+						if(brandShopPattern.test(location.href)){
+							linkDomain = brandShopPattern.exec(location.href);
+						}else{
+							linkDomain = brandMallPattern.exec(location.href);
+						}
+						if(linkDomain!=null){
+							linkDomain = linkDomain[0];
+						}
+						
+						if(linkDomain=='https://secure.elandmall.com'){
+							$("#_mall_brand_list").find("span").eq(0).show();
+							return;
+						}
+						if( elandmall.util.getCookie(linkDomain)!=null && elandmall.util.getCookie(linkDomain)!="" ){
+							$("#" + elandmall.util.getCookie(linkDomain)).show();
+							return;
+						}
+						
+						var brandList = $("#_mall_brand_list li");
+
+						$.each(brandList, function(key, val){
+							var aTagHref = $(this).find("a").attr("href");
+							var aTagDomain = "aTagDomain";
+							
+							if(brandShopPattern.test(aTagHref)){    // 브랜드 샵
+								aTagDomain = brandShopPattern.exec(aTagHref);
+							}else{							 		// 브랜드 몰 
+								aTagDomain = brandMallPattern.exec(aTagHref);									
+							}
+							if(aTagDomain!=null){
+								aTagDomain = aTagDomain[0];
+							}							
+							
+							elandmall.util.setCookie({ name: aTagDomain, value: escape($(this).find("span").eq(0).attr("id")) , domain: elandmall.global.cookie_domain });
+							
+							if(aTagDomain == linkDomain){	
+								$(this).find("span").eq(0).show();	
+								return;
+							}
+						});
+					}
+					checkBrandSite();
+				});
+			</script>
+
+						
+
+			<!-- //비정형 영역 처리  -->
+				
+				
+			
+				<!-- TNB -->
+				<div class="hd_tnb">
+					<dl>
+						<dt class="ir">마이메뉴</dt>
+							<dd id="dd_logout" style="display:none"><a href="javascript:;" onclick="javascript:elandmall.logout({})" data-ga-tag='PC_GNB||공통정보||로그아웃'>로그아웃</a></dd>
+							<dd id="dd_login" style="display:none"><a href="javascript:;" id="login_btn" onclick="javascript:elandmall.login({rtn_btn_id:'#login_btn'});return false;" data-ga-tag='PC_GNB||공통정보||로그인'>로그인</a></dd>
+							<dd id="dd_join" style="display:none"><a href="javascript:;" onclick="javascript:elandmall.oneclick.fnMemJoin();" data-ga-tag='PC_GNB||공통정보||회원가입'>회원가입</a></dd>
+						<dd><a href="javascript:;" onclick="javascript:elandmall.hdLink('CART');" data-ga-tag='PC_GNB||공통정보||장바구니'>장바구니<span class="num"><b>0</b></span></a></dd>
+						<dd><a href="javascript:;" onclick="javascript:elandmall.hdLink('MYPAGE');" data-ga-tag='PC_GNB||공통정보||마이페이지'>마이페이지</a></dd>
+						<dd><a href="javascript:;" onclick="javascript:elandmall.hdLink('CUSTCENTER');" data-ga-tag='PC_GNB||공통정보||고객센터'>고객센터</a></dd>
+		
+						   <dd id="ddDirectOn"><a href="javascript:elandmall.event.goEventConts({event_no:'E160900877'});">바로방문<span class="on"><b>ON</b></span></a></dd>
+						
+					</dl>
+
+						<div class="visit_on" id="visit_on_div" style="display:none;">
+
+
+					    
+							<a href="javascript:elandmall.event.goEventConts({event_no:'E160900877'});"><img src="//www.elandmall.com/images/pcweb/common/visit_on.png" alt="바로방문 ON 접속 시, 매일 1인 1회 2,000원 할인 쿠폰을 드립니다."></a>
+                        
+					</div><!-- 160824 추가 -->
+				</div>
+				<!-- //TNB -->
+
+				<!-- SEARCH -->
+				<div class="hd_sch" id="hd_sch">
+					<form name="headerSearchForm" autocomplete="off" id="headerSearchForm" method="get" onsubmit="return fnsearch.srchKwd(this)" action="../search/search.action">
+						<div class="sch_wrap">
+							<div class="sch_box">
+								<label class="ir" for="searchTerm">검색</label>
+
+			<!-- 비정형 영역 처리   -->
+			<!-- 
+	내 용 : 검색 광고 문구
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<input type="text" class="input d_searchTerm" name="kwd" id="searchTerm" />
+				<input type="hidden" id="searchAd" value="" />
+ 
+
+			<!-- //비정형 영역 처리  -->
+
+							</div>
+	
+							<!-- KEYWORD LAYER -->
+							<div id="sch_keyword" class="sch_keyword d_sch_keyword">
+								<dl class="f_keyword">
+									<dt><button type="button" >인기 검색어</button></dt>
+									<dd style="display: none;">
+										<!-- 인기검색어 -->
+										<ol id="rankings">
+										</ol>
+										<!-- //인기검색어 -->
+									</dd>
+									<dt><button type="button"  class="on">최근 검색어</button></dt>
+									<!-- 최근검색어 -->
+									<dd id="headerResentKwd"  style="display: block;">
+									</dd>
+									<!-- //최근검색어 -->
+								</dl>
+							</div>
+							<!-- //KEYWORD LAYER -->
+	
+							<!-- AUTO COMPLETE LAYER -->
+							<div id="sch_complete" class="sch_keyword d_sch_complete" >
+								<div class="s_keyword">
+									<ul>
+									</ul>
+								</div>
+								<div class="s_del"><button type="button">끄기</button></div>
+							</div>
+							<!-- //AUTO COMPLETE LAYER -->
+	
+							<button type="button" id="sch_del" class="sch_del" title="삭제하기">끄기</button>
+							<button type="button" id="sch_btn" class="sch_btn" title="검색하기" data-ga-tag='MH_W_GNB||TOP||검색'>검색</button>
+						</div>
+					</form>
+				</div>
+				<!-- //SEARCH -->
+				
+
+
+
+	
+			
+				
+
+				<!-- SNS -->
+				<div class="hd_sns">
+					<ul>
+
+						<li><a href="https://www.facebook.com/MIXXO.KR" target="blank">facebook</a><span class="ir">페이지로 이동</span></li>
+						<li><a href="https://www.instagram.com/mixxo_korea/" target="blank">instagram</a><span class="ir">페이지로 이동</span></li>
+						<li><a href="http://plus.kakao.com/home/@%EB%AF%B8%EC%8F%98" target="blank">kakao</a><span class="ir">친구추가 페이지로 이동</span></li>
+						<li><a href="http://blog.naver.com/mixxo_kr" target="blank">blog</a><span class="ir">페이지로 이동</span></li>
+
+					</ul>
+				</div>
+				<!-- //SNS  -->
+
+				
+		
+
+				<!-- CATG ALL -->
+				<div class="hd_catg" id="gnb">
+					<div class="catg_wrap">
+
+						<button type="button"  id="catg_bt" onclick="javascript:getCtgList();" class="catg_bt" data-ga-tag='MH_W_GNB||TOP||전체보기'>CATEGORY</button>
+						<!-- LAYER -->
+						<div class="catg_lyr" id="catg_lyr">
+							<div class="catg_all" id="catg_all">	
+							</div>
+						    <button type="button"  id="catg_cls" class="bt_close">카테고리 전체보기 닫기</button>
+						</div>
+						<!-- //LAYER -->
+
+					</div>
+				</div>
+				<!-- //CATG ALL -->
+				
+				<!-- DISP. MENU -->
+				<div class="hd_disp">
+					<dl>
+						<dt class="ir">전시메뉴</dt>
+						
+
+						<dd><a href="javascript:;" onclick="elandmall.dispctg.fnCategoryPathInfo({disp_ctg_no:'1607300005'})">CLOTHING</a>
+
+							<div class="depth2" id="CTG1607300005" data="1607300005"></div>
+							
+						</dd>
+
+						<dd><a href="javascript:;" onclick="elandmall.dispctg.fnCategoryPathInfo({disp_ctg_no:'1607300004'})">ACCESSORY</a>
+
+							<div class="depth2" id="CTG1607300004" data="1607300004"></div>
+							
+						</dd>
+
+						<dd><a href="javascript:;" onclick="elandmall.dispctg.fnCategoryPathInfo({disp_ctg_no:'1607300007'})">MIXXO SECRET</a>
+
+							<div class="depth2" id="CTG1607300007" data="1607300007"></div>
+							
+						</dd>
+
+						<dd><a href="javascript:;" onclick="elandmall.hdLink('NEWGOODS');">NEW</a></dd>
+						<dd><a href="javascript:;" onclick="elandmall.hdLink('BEST_BRANDMALL');">BEST</a></dd>
+						<dd><a href="javascript:;" onclick="elandmall.hdLink('SALEGOODS');">SALE</a></dd>
+						<dd><a href="javascript:;" onclick="elandmall.hdLink('PLAN_SHOP');">MIXXO MD</a></dd>
+						<dd class="last"><a href="javascript:;" onclick="elandmall.hdLink('EVENT');">EVENT</a></dd>
+
+						
+					</dl>
+				</div>
+				<!-- //DISP. MENU -->
+				<script type="text/javascript">
+				 $(document).ready(function() {
+					$(".hd_disp > dl > dd").on("mouseover", function() {
+						if( $(this).find(".depth2").length > 0 && $.trim($(this).find(".depth2").html()) == "") {
+						    var objDepth1 = $(this);
+						    var obj = objDepth1.find(".depth2");
+							$.ajax({
+								url: "/dispctg/searchGnbLowCategoryList.action",
+								dataType: "html",
+								data: {disp_ctg_no:obj.attr("data")},
+								async: false,
+								success : function(data) {
+									obj.html(data);
+									objDepth1.addClass('active');
+									
+								}
+							});
+						}
+					});
+					
+				});
+				 var gnbMenu = new commonUI.header.gnbCate('.hd_disp');
+   			    
+				</script>
+				
+
+			</div>
+		</div>
+		<!-- //HEADER -->
+
+
+		
+		<!-- 검색 광고문구, 일반검색 분기 -->
+		<script type="text/javascript">
+			var $d_hd_sch = $('#hd_sch');
+			var $searchAd = $('#searchAd');//광고
+			var $d_searchinfo = $d_hd_sch.find('#searchTerm');//검색창
+			var $d_btn_search = $d_hd_sch.find('#sch_btn');//검색버튼
+			
+			$d_searchinfo.val($searchAd.val());
+			
+			$d_searchinfo.on('click focus',function() {
+				$d_searchinfo.val('');
+				$searchAd.val('');
+			});
+			
+			$d_btn_search.on('click',function() {
+				if($searchAd.val()==''){
+					$("#headerSearchForm").submit();
+				} else {
+					location.href = $("#searchAd").attr("data-link");
+				}
+			});
+		</script>
+		<!-- container -->
+		<div id="container">
+			<div class="wing_menu">
+			<!-- 좌측 비정형배너 -->
+			<!-- 
+	내 용 : 좌측 비정형 배너
+ -->
+
+
+
+	<div class="wm_left">
+		<ul class="wm_list">
+
+			<li><a href="javascript:;" onclick="elandmall.layout.fnStartPage(); return false;" class="wm_l01" data-ga-tag='PC_공통||상단윙메뉴||시작페이지'>시작페이지</a></li>						
+			<li><a href="javascript:;" onclick="elandmall.layout.fnAddBookmark(); return false;" class="wm_l02" data-ga-tag='PC_공통||상단윙메뉴||즐겨찾기'>즐겨찾기</a></li>						
+			<li><a href="javascript:;" onclick="elandmall.layout.fnAppIntro(); return false;" class="wm_l03" data-ga-tag='PC_공통||상단윙메뉴||앱다운로드'>앱다운로드</a></li>
+
+		</ul>
+
+		<!-- 비정형 영역 처리   -->
+		<!-- 
+	내 용 : 좌측 비정형 배너
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+		<!-- //비정형 영역 처리  -->
+
+		<!-- 비정형 영역 처리   -->
+		<!-- 
+	내 용 : 좌측 비정형 배너 롤링
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="wm_adds" id="wingleftBanner">
+				<div class="swiper-container">
+					<ul class="swiper-wrapper">
+
+					<li class="swiper-slide" data-index="0" data-ga-tag='PC_공통||상단윙배너||스틸레토'>
+					<a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'Y',banner_kind_cd:'90' ,conts_form_cd:'130' ,conts_divi_cd:'10' ,conts_dist_no:'C17022309130935' ,sale_area_no:'D1607000727' , rel_divi_cd:'20' , rel_no:'170200000014407', move_cont_no:'', url:'http://mixxo.elandmall.com/goods/initGoodsDetail.action?goods_no=1702141903&vir_vend_no=VV1600190'})"><img src="//www.elandmall.com/upload/dspl/banner/90/601/00/170200000018601.jpg" width="66" height="144" alt="스틸레토" /></a>	
+					</li>
+
+					<li class="swiper-slide" data-index="1" data-ga-tag='PC_공통||상단윙배너||에나멜'>
+					<a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'Y',banner_kind_cd:'90' ,conts_form_cd:'130' ,conts_divi_cd:'10' ,conts_dist_no:'C17022309130936' ,sale_area_no:'D1607000727' , rel_divi_cd:'20' , rel_no:'170200000014408', move_cont_no:'', url:'http://mixxo.elandmall.com/goods/initGoodsDetail.action?goods_no=1701126034&vir'})"><img src="//www.elandmall.com/upload/dspl/banner/90/602/00/170200000018602.jpg" width="66" height="144" alt="에나멜" /></a>	
+					</li>
+
+					<li class="swiper-slide" data-index="2" data-ga-tag='PC_공통||상단윙배너||슬링백'>
+					<a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'Y',banner_kind_cd:'90' ,conts_form_cd:'130' ,conts_divi_cd:'10' ,conts_dist_no:'C17022309130937' ,sale_area_no:'D1607000727' , rel_divi_cd:'20' , rel_no:'170200000014409', move_cont_no:'', url:'http://mixxo.elandmall.com/goods/initGoodsDetail.action?goods_no=1702141902'})"><img src="//www.elandmall.com/upload/dspl/banner/90/603/00/170200000018603.jpg" width="66" height="144" alt="슬링백" /></a>	
+					</li>
+
+					</ul>
+				</div>
+				<div class="wl_btns">
+					<button type="button" class="wl_prev d_prev">이전</button>
+					<button type="button" class="wl_next d_next">다음</button>
+					<div class="wl_cnt">
+						<span class="wlc_idx">1</span>/<span class="wlc_length">3</span>
+					</div>
+				</div>
+			</div>
+<script>
+function wl_bn(){
+	var wl_banner_ins = new Swiper('#wingleftBanner .swiper-container',{
+		speed: 300
+		,autoplay: 3000
+		,simulateTouch : false
+		,createPagination: false
+		,paginationClickable : false
+		,loop : true
+		,onSlideChangeEnd : function() {
+			$('.wl_cnt').find('.wlc_idx').text(wl_banner_ins.activeLoopIndex+1);
+		}
+	});
+	var $target = $('#wingleftBanner');
+
+	var wl_swiperEle = { $target : $target , status : true , last_idx : 0 , ins : wl_banner_ins , $prevBtn : $target.find(".d_prev") , $nextBtn :  $target.find(".d_next") };
+	// $target : 최상단 박스 ,  status : autoplay - play , last_idx : autoplay 관련 , ins : swiper instance name
+
+	wl_swiperEle.$target.hover(
+		function (e) { //mouseenter
+			wl_swiperEle.ins.stopAutoplay();
+			e.preventDefault();
+		},
+		function (e) { //mouseleave
+			if ( wl_swiperEle.status ) wl_swiperEle.ins.startAutoplay();
+			e.preventDefault();
+		}
+	);
+
+	wl_swiperEle.$prevBtn.on('click',function(e){
+		wl_swiperEle.ins.swipePrev();
+	})
+
+	wl_swiperEle.$nextBtn.on('click',function(e){
+		wl_swiperEle.ins.swipeNext();
+	})
+
+	wl_swiperEle.$target.on("keydown", ".swiper-slide > a" , function(e) {
+		var idx = Math.floor($(this).attr('data-index'));
+		if(e.keyCode == 9){ wl_swiperEle.ins.swipeTo(idx, 0 , 0 );}
+		wl_swiperEle.last_idx = idx;
+	});
+
+	wl_swiperEle.$target.on("focusin" , "a" , function(e) {
+		wl_swiperEle.ins.stopAutoplay();
+	});
+
+	wl_swiperEle.$target.on("focus", ".swiper-slide" ,function(){
+		var idx = Math.floor($(this).attr('data-index'));
+		wl_swiperEle.ins.stopAutoplay();
+		wl_swiperEle.ins.swipeTo( idx, 0 , 0 )
+	})
+
+	wl_swiperEle.$target.find(".swiper-slide-duplicate a").attr('tabindex','-1');
+	setTimeout(function(){
+		wl_swiperEle.$target.find(".swiper-slide:not(.swiper-slide-duplicate)").removeAttr('tabindex');
+	},1000)
+	
+	// random
+	function wl_bn_rand(){
+		var lengths = wl_swiperEle.$target.find(".swiper-slide:not(.swiper-slide-duplicate)").length;
+		var random_idx = Math.floor(Math.random()*lengths);
+		wl_swiperEle.ins.swipeTo( random_idx , 0 , 0 );
+		$('.wl_cnt').find('.wlc_idx').text(wl_banner_ins.activeLoopIndex+1);
+	}
+	wl_bn_rand();
+}
+
+$(window).ready(function(){
+	wl_bn();
+})
+</script>
+ 
+
+		<!-- //비정형 영역 처리  -->
+
+	</div>
+			<!-- //좌측 비정형배너 -->
+			
+			<!-- 스카이스크랩퍼 -->
+			<!-- 
+	내 용 : 스카이스크랩퍼
+-->
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//스카이 스크랩퍼
+	fnSkyScraperLatelyPic = function (p){
+		$("#wm_goods_wrap").load("/goods/searchScrapperGoodList.action?",p);
+	}
+	
+	fnSkyScraperLatelyPic();
+	
+});
+</script>
+
+	<div class="wm_right">
+		<div class="wm_user">
+			
+		</div>
+		<ul class="wm_list">
+
+			<li><a href="javascript:;" onClick="elandmall.mypage.link.goodListLately(); return false;" class="wm_r02" data-ga-tag='PC_공통||플로팅 최근본상품||최근본상품'>최근본상품</a></li>
+		</ul>
+		
+		<div class="wm_goods_wrap" tabindex="0" id="wm_goods_wrap">
+		<!-- 이부분에 fnSkyScraperLatelyPic 로 상품가져옴 -->
+		</div>
+		
+		<span class="wm_top"><a href="#">TOP</a></span><!-- 160805 -->
+			<!-- BANNER -->
+
+		<!-- 비정형 영역 처리   -->
+		<!-- 
+	내 용 : 우측 비정형 배너
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+		<!-- //비정형 영역 처리  -->
+				
+			<!-- //BANNER  -->
+	</div>				
+
+			<!-- //스카이스크랩퍼 -->
+			</div>
+				
+<div id="content" class="layout_wide">
+
+     
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	fnNaviCtgInit = function(){
+		//historyback일 때, 기존의 selected를 잡아준다.
+		$("select[id^=nav]").each(function(){
+			var nav_slt = $(this);
+			nav_slt.children('option').each(function(){
+				if(typeof($(this).attr("selected")) != "undefined"){
+					$(this).prop("selected", true);
+				}
+			});
+		});
+	}
+	
+   $("select[name=navCtg]").each(function(){
+       $(this).bind('change', function() {
+           //해당 카테고리 이동 처리 하기
+          
+           elandmall.dispctg.fnCategoryPathInfo({disp_ctg_no:$(this).val()});
+       });
+   });
+   
+   //초기화
+	fnNaviCtgInit();
+});
+
+$(document).ready(function() {
+   $("select[name=brandCtg]").each(function(){
+       $(this).bind('change', function() {
+           //해당 카테고리 이동 처리 하기
+           elandmall.brand.goBrandShop($(this).children("option:selected").attr("data") , $(this).val());
+       });
+   });
+});
+//-->
+</script>
+<div class="location">
+	<ul>
+		<li ><a  class="home" href="javascript:;"  onclick="javascript:elandmall.hdLink('MALL_MAIN');">HOME</a></li>
+
+			<li>
+				<select name="navCtg" id="nav1"  >
+
+					<option value="1607300005" 
+
+	            	    selected="selected"
+
+						>CLOTHING</option>
+
+					<option value="1607300004" 
+
+						>ACCESSORY</option>
+
+					<option value="1607300007" 
+
+						>MIXXO SECRET</option>
+
+				</select>
+			</li>
+
+	</ul>    
+</div>
+	 
+     <div class="title">
+		<h2 class="tit_h2">CLOTHING</h2>
+		<div class="right">
+			<a class="btn03 type_img" href="#" onclick="elandmall.wishlist.addCategoryWish('1607300005');"><span><img src="//www.elandmall.com/images/pcweb/common/ico_heart.png" alt="" />카테고리 찜하기</span></a>
+		</div>
+	</div>
+		
+       <!-- 대분류 영역 분리후 해당 코너 스탁 연결 하기  -->
+       
+
+
+
+
+
+
+
+
+
+
+
+<!-- 영역 레벨 시작  --><div  id="D1512000272" class="area_lv1">
+<!-- 영역 레벨 시작  --><div  id="D1512000280" class="area_lv2">
+
+	<!-- 
+	내용 : 대분류 카테고리 &이벤트/광고배너
+ -->
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="cate_area01">
+
+	<div class="lnb_cate01">
+
+		<ul>
+
+			<li data-ga-tag='PC_대카상단||Outer'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300305'})"><span class="none">Outer</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Coat'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300501'})"><span class="none">Coat</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Jacket'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300502'})"><span class="none">Jacket</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Jumper'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300503'})"><span class="none">Jumper</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Vest'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300504'})"><span class="none">Vest</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+			<li data-ga-tag='PC_대카상단||Knit/Cardigan'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300304'})"><span class="none">Knit/Cardigan</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Cardigan'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300499'})"><span class="none">Cardigan</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Knit'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300500'})"><span class="none">Knit</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+			<li data-ga-tag='PC_대카상단||Dress'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300303'})"><span class="none">Dress</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Dress'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300498'})"><span class="none">Dress</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+			<li data-ga-tag='PC_대카상단||Blouse/Shirts'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300301'})"><span class="none">Blouse/Shirts</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Blouse'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300492'})"><span class="none">Blouse</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Shirts'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300493'})"><span class="none">Shirts</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+			<li data-ga-tag='PC_대카상단||Bottom'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300302'})"><span class="none">Bottom</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Jeans'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300494'})"><span class="none">Jeans</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Long pants'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300495'})"><span class="none">Long pants</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Short pants'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300496'})"><span class="none">Short pants</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Skirts'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300497'})"><span class="none">Skirts</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+			<li data-ga-tag='PC_대카상단||T-Shirt'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300306'})"><span class="none">T-Shirt</span></a>			
+
+				<div class="depth2">
+					<ul>
+
+						<li data-ga-tag='PC_대카상단||Long-sleeves'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300505'})"><span class="none">Long-sleeves</span></a></li>
+
+						<li data-ga-tag='PC_대카상단||Short-sleeves'><a href="#none" onClick="elandmall.dispctg.goDispctg({disp_ctg_no:'1607300506'})"><span class="none">Short-sleeves</span></a></li>
+				
+					</ul>
+				</div>
+					
+			</li>
+
+		</ul>
+	</div>
+	
+
+</div>
+
+
+
+
+ 
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000281" class="area_lv2">
+<!-- 영역 레벨 시작  --><div  id="D1512000282" class="area_lv3">
+<!-- 영역 레벨 시작  --><div  id="D1512000284" class="area_lv4">
+
+	<!-- 
+	내용 : 대분류 빌보드 배너 
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+<div class="box_promotion_bnr">
+	<div class="d_promo_container">	
+
+		<a href="javascript:;" class="btn_prev_move _d_left"><span>이전보기</span></a>
+		<a href="javascript:;" class="btn_next_move _d_right"><span>다음보기</span></a>
+		<ul class="d_bnr_cont">
+
+			<li data-ga-tag='PC_대카상단||CLOTHING_대카메인_1||CLOTHING_카테고리_의류'><a href="javascript:;"><img src="//www.elandmall.com/upload/dspl/banner/90/399/00/170200000017399.jpg" width="650" height="390" alt="카테고리_의류" /></a></li>			
+		
+		</ul>
+		<div class="set_indicator">
+			<ul class="d_indi">
+
+				<li><a href="javascript:;" class='on'>롤링 프로모션 배너1번</a></li>
+
+			</ul>
+			<span class="d_auto"><a href="javascript:;" class="d_play">자동롤링</a><a href="#" class="d_stop">자동롤링 정지</a></span>
+		</div>	
+ 
+	</div>
+</div>
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000285" class="area_lv4">
+
+	<!-- 
+	내용 : 대분류 베스트상품
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="box_best_bnr">
+
+			<strong class="tit">MD PICK</strong>
+	
+			<div class="set_indicator">
+				<ul class="d_indi">	
+
+					<li><a href="javascript:;" class="swiper-pagination-switch">롤링 프로모션 배너1번</a></li>					
+
+					<li><a href="javascript:;" class="swiper-pagination-switch">롤링 프로모션 배너2번</a></li>					
+
+					<li><a href="javascript:;" class="swiper-pagination-switch">롤링 프로모션 배너3번</a></li>					
+
+					<li><a href="javascript:;" class="swiper-pagination-switch">롤링 프로모션 배너4번</a></li>					
+
+					<li><a href="javascript:;" class="swiper-pagination-switch">롤링 프로모션 배너5번</a></li>					
+				
+				</ul>
+				<span class="d_auto"><a href="javascript:;" class="d_play">자동롤링</a><a href="javascript:;" class="d_stop">자동롤링 정지</a></span>
+			</div>			
+			
+			<div id="rolling_best" class="d_rolling_bnr02">
+				<ul class="swiper-wrapper">
+
+						<li class="swiper-slide" data-index="0" data-ga-tag="PC_대카상단||CLOTHING_대카베스트_1||CLOTHING_플라워 스트랩 블라우스">
+							<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701126043', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000285', tr_yn:'Y', conts_dist_no:'C17022209101604', conts_divi_cd:'10', rel_no:'1701126043', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플라워 스트랩 블라우스', cust_sale_price:39900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><div class="thumb"><img src="//www.elandmall.com/upload/prd/img/043/240/1701126043_0000009.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="플라워 스트랩 블라우스상세보기"/></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">플라워 스트랩 블라우스</span><div class="box_price"><div class="cont_price"><span class="c_price"><strong>39,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701126043','VV16001901','11','1607300005','D1512000285','C17022209101604');"><span>찜하기</span></a></div>
+						</li>
+
+						<li class="swiper-slide" data-index="1" data-ga-tag="PC_대카상단||CLOTHING_대카베스트_2||CLOTHING_포멀 버튼 하프자켓">
+							<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701127876', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000285', tr_yn:'Y', conts_dist_no:'C17022209101598', conts_divi_cd:'10', rel_no:'1701127876', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'포멀 버튼 하프자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><div class="thumb"><img src="//www.elandmall.com/upload/prd/img/876/240/1701127876_0000005.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="포멀 버튼 하프자켓상세보기"/></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">포멀 버튼 하프자켓</span><div class="box_price"><div class="cont_price"><span class="c_price"><strong>89,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701127876','VV16001901','11','1607300005','D1512000285','C17022209101598');"><span>찜하기</span></a></div>
+						</li>
+
+						<li class="swiper-slide" data-index="2" data-ga-tag="PC_대카상단||CLOTHING_대카베스트_3||CLOTHING_모던 솔리드 블라우스">
+							<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612096751', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000285', tr_yn:'Y', conts_dist_no:'C17022209101607', conts_divi_cd:'10', rel_no:'1612096751', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'모던 솔리드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><div class="thumb"><img src="//www.elandmall.com/upload/prd/img/751/240/1612096751_0000040.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="모던 솔리드 블라우스상세보기"/></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">모던 솔리드 블라우스</span><div class="box_price"><div class="cont_price"><span class="c_price"><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1612096751','VV16001901','11','1607300005','D1512000285','C17022209101607');"><span>찜하기</span></a></div>
+						</li>
+
+						<li class="swiper-slide" data-index="3" data-ga-tag="PC_대카상단||CLOTHING_대카베스트_4||CLOTHING_심플 패턴 블라우스">
+							<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612102251', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000285', tr_yn:'Y', conts_dist_no:'C17022209101606', conts_divi_cd:'10', rel_no:'1612102251', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'심플 패턴 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><div class="thumb"><img src="//www.elandmall.com/upload/prd/img/251/240/1612102251_0000008.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="심플 패턴 블라우스상세보기"/></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">심플 패턴 블라우스</span><div class="box_price"><div class="cont_price"><span class="c_price"><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1612102251','VV16001901','11','1607300005','D1512000285','C17022209101606');"><span>찜하기</span></a></div>
+						</li>
+
+						<li class="swiper-slide" data-index="4" data-ga-tag="PC_대카상단||CLOTHING_대카베스트_5||CLOTHING_플로랄 러플 블라우스">
+							<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702131349', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000285', tr_yn:'Y', conts_dist_no:'C17022209101603', conts_divi_cd:'10', rel_no:'1702131349', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플로랄 러플 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><div class="thumb"><img src="//www.elandmall.com/upload/prd/img/349/240/1702131349_0000003.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="플로랄 러플 블라우스상세보기"/></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">플로랄 러플 블라우스</span><div class="box_price"><div class="cont_price"><span class="c_price"><strong>49,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702131349','VV16001901','11','1607300005','D1512000285','C17022209101603');"><span>찜하기</span></a></div>
+						</li>
+				
+				</ul>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			$(window).ready(function() {
+				var box_best_opt = { pagination: '.box_best_bnr .d_indi' , speed: 300 , autoplay: 3000 , simulateTouch : false , createPagination: false , paginationElement : "a" , paginationClickable : true , loop : true}
+				var box_best_bnr = new Swiper('#rolling_best',box_best_opt);
+			
+				var swiperEle = {
+					$target : $('.box_best_bnr')
+					,status : true
+					,last_idx : 0
+					,ins : box_best_bnr
+				};// 최상단 박스 , $target : autoplay - play , status : stop 버튼 관련 , last_idx : autoplay 관련 , ins : swiper instance name
+			
+				swiperEle.$target.hover(
+					function (e) { //mouseenter
+						swiperEle.ins.stopAutoplay();
+						e.preventDefault();
+					},
+					function (e) { //mouseleave
+						if ( swiperEle.status ) swiperEle.ins.startAutoplay();
+						e.preventDefault();
+					}
+				);
+				
+				swiperEle.$target.find('.d_indi a').on('click',function(e){
+					e.preventDefault();
+				});
+				
+				swiperEle.$target.find('.d_play').on('click', function(e){
+					swiperEle.status = true;
+					swiperEle.ins.startAutoplay();
+			
+					$(this).parent().removeClass("ons");
+					swiperEle.$target.find('.d_stop').focus();
+					e.preventDefault();
+				});
+			
+				swiperEle.$target.find('.d_stop').on('click', function(e){
+					swiperEle.status = false;
+					swiperEle.ins.stopAutoplay();
+			
+					$(this).parent().addClass("ons");
+					swiperEle.$target.find('.d_play').focus();
+					e.preventDefault();
+				});
+			
+				swiperEle.$target.on("keydown", ".swiper-slide" , function(e) {
+					var idx = Math.floor($(this).attr('data-index'));
+					if(e.keyCode == 9){ swiperEle.ins.swipeTo(idx, 0 , 0 );}
+					swiperEle.last_idx = idx;
+				});
+			
+				var end_idx = parseInt(swiperEle.$target.find(".swiper-slide").data("index"))+1; // 마지막 blur 처리
+				swiperEle.$target.find(".swiper-slide").eq(end_idx).on("blur", "a:last" ,function(e){
+					swiperEle.ins.startAutoplay();
+					e.preventDefault();
+				})
+			
+				swiperEle.$target.on("focusin" , "a" , function(e) {
+					swiperEle.ins.stopAutoplay();
+				});
+			
+				swiperEle.$target.on("focus", ".swiper-slide" ,function(){
+					var idx = Math.floor($(this).attr('data-index'));
+					swiperEle.ins.stopAutoplay();
+					swiperEle.ins.swipeTo( idx, 0 , 0 )
+				})
+			});
+		</script>		
+
+</div><!-- //영역 레벨 끝 -->
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000283" class="area_lv3">
+
+	<!-- 
+	내용 : 대분류 추천브랜드 로고
+ -->
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</div><!-- //영역 레벨 끝 -->
+</div><!-- //영역 레벨 끝 -->
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000273" class="area_lv1">
+
+	<!-- 
+	내용 : 대분류 상단이벤트 배너
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000274" class="area_lv1">
+
+	<!-- 
+	내용 : 대분류 추천기획전
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000275" class="area_lv1">
+
+	<!-- 
+	내용 : 대분류 무료배송 & 신상품
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="box_corner">
+	<div class="box_freeship">
+
+	</div> 
+	<div class="box_plusone">
+
+		<div id="rolling_list02">
+		
+			<div class="roll_indi">
+
+					<a href="javascript:;" class="swiper-pagination-switch">카테고리 BEST 배너1번</a>
+
+					<a href="javascript:;" class="swiper-pagination-switch">카테고리 BEST 배너2번</a>
+
+					<a href="javascript:;" class="swiper-pagination-switch">카테고리 BEST 배너3번</a>
+
+			</div>	
+
+				
+			<!-- 4단 상품 리스트 -->
+			<div class="list_product01 swiper-wrapper d_prd_over">
+				<ul class="list swiper-slide" data-index="0">
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702150012', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319090', conts_divi_cd:'10', rel_no:'1702150012', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'소프트 리본 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/012/240/1702150012_0000002.jpg" data-ga-tag="PC_대카하단||신상품||소프트 리본 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/012/240/1702150012_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="소프트 리본 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">소프트 리본 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702150012','VV16001901','11','1607300005','D1512000275','C17030209319090');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702150012', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319090', conts_divi_cd:'10', rel_no:'1702150012', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'소프트 리본 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702150012', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319090', conts_divi_cd:'10', rel_no:'1702150012', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'소프트 리본 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702150012', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149996', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319091', conts_divi_cd:'10', rel_no:'1702149996', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 스트라이프 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/996/240/1702149996_0000002.jpg" data-ga-tag="PC_대카하단||신상품||클래식 스트라이프 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/996/240/1702149996_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="클래식 스트라이프 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">클래식 스트라이프 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>49,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702149996','VV16001901','11','1607300005','D1512000275','C17030209319091');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702149996', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319091', conts_divi_cd:'10', rel_no:'1702149996', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 스트라이프 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149996', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319091', conts_divi_cd:'10', rel_no:'1702149996', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 스트라이프 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702149996', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+
+							</ul>
+							<ul class="list swiper-slide" data-index="1">
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149995', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319092', conts_divi_cd:'10', rel_no:'1702149995', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'비비드 스트라이프 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/995/240/1702149995_0000003.jpg" data-ga-tag="PC_대카하단||신상품||비비드 스트라이프 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/995/240/1702149995_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="비비드 스트라이프 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">비비드 스트라이프 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702149995','VV16001901','11','1607300005','D1512000275','C17030209319092');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702149995', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319092', conts_divi_cd:'10', rel_no:'1702149995', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'비비드 스트라이프 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149995', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319092', conts_divi_cd:'10', rel_no:'1702149995', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'비비드 스트라이프 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702149995', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149994', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319093', conts_divi_cd:'10', rel_no:'1702149994', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 비비드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/994/240/1702149994_0000003.jpg" data-ga-tag="PC_대카하단||신상품||베이직 비비드 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/994/240/1702149994_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="베이직 비비드 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">베이직 비비드 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702149994','VV16001901','11','1607300005','D1512000275','C17030209319093');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702149994', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319093', conts_divi_cd:'10', rel_no:'1702149994', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 비비드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149994', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319093', conts_divi_cd:'10', rel_no:'1702149994', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 비비드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702149994', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+
+							</ul>
+							<ul class="list swiper-slide" data-index="2">
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149993', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319094', conts_divi_cd:'10', rel_no:'1702149993', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 파스텔 블라우스', cust_sale_price:19900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/993/240/1702149993_0000002.jpg" data-ga-tag="PC_대카하단||신상품||베이직 파스텔 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/993/240/1702149993_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="베이직 파스텔 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">베이직 파스텔 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>19,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702149993','VV16001901','11','1607300005','D1512000275','C17030209319094');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702149993', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319094', conts_divi_cd:'10', rel_no:'1702149993', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 파스텔 블라우스', cust_sale_price:19900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149993', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319094', conts_divi_cd:'10', rel_no:'1702149993', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 파스텔 블라우스', cust_sale_price:19900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702149993', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+
+				<li>
+					<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149991', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319095', conts_divi_cd:'10', rel_no:'1702149991', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'롱 트렌치 코트', cust_sale_price:99000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/991/240/1702149991_0000002.jpg" data-ga-tag="PC_대카하단||신상품||롱 트렌치 코트"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/991/240/1702149991_0000001.jpg" width="240" height="240" onError="this.src='//www.elandmall.com/images/pcweb/common/240_noimg.gif'" alt="롱 트렌치 코트"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">롱 트렌치 코트</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>99,000</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702149991','VV16001901','11','1607300005','D1512000275','C17030209319095');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702149991', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319095', conts_divi_cd:'10', rel_no:'1702149991', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'롱 트렌치 코트', cust_sale_price:99000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702149991', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000275', tr_yn:'Y', conts_dist_no:'C17030209319095', conts_divi_cd:'10', rel_no:'1702149991', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'롱 트렌치 코트', cust_sale_price:99000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702149991', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+				</li>
+			
+				</ul>
+			</div>	
+		</div>	
+		
+	</div>							
+</div>
+
+<script type="text/javascript">
+	$(window).ready(function() {
+		var box_freeship_opt = { pagination: '#rolling_list01 .roll_indi' , speed: 300 , simulateTouch : false , createPagination: false , paginationElement : "a" , paginationClickable : true}
+		var box_plusone_opt = { pagination: '#rolling_list02 .roll_indi' , speed: 300 , simulateTouch : false , createPagination: false , paginationElement : "a" , paginationClickable : true}
+		var box_freeship_bnr = new Swiper('#rolling_list01',box_freeship_opt);
+		var box_plusone_bnr = new Swiper('#rolling_list02',box_plusone_opt);
+		$("#rolling_list01").find('.swiper-slide').on("focusin",function(){
+			var idx = Math.floor($(this).attr('data-index'));
+			box_freeship_bnr.swipeTo( idx, 0 , 0 )
+		})
+		$("#rolling_list02").find('.swiper-slide').on("focusin",function(){
+			var idx = Math.floor($(this).attr('data-index'));
+			box_plusone_bnr.swipeTo( idx, 0 , 0 )
+		})
+	
+		$(".swiper-slide-duplicate a").attr('tabindex','-1');
+		$(".swiper-slide:not(.swiper-slide-duplicate)").attr('tabindex','0');
+		
+		//무료배송&신상품 숨기기
+		if(0 == 0 || 6 == 0){
+			$('div[class=box_corner]').hide();
+		}
+	});
+</script>
+
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000276" class="area_lv1">
+
+	<!-- 
+	내용 : MD추천상품
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="box_md_recomm">
+
+			<div class="title">
+				<h3 class="tit_h3_bg01"><span><strong class="txt_en">BEST 10</strong> </span></h3>
+			</div>
+
+			<!-- 5단 상품 리스트 -->
+			<div class="list_product01 size05 d_prd_over">
+				<ul class="list">
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612096751', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101677', conts_divi_cd:'10', rel_no:'1612096751', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'모던 솔리드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/751/240/1612096751_0000035.jpg" data-ga-tag="PC_대카하단||MD추천상품||모던 솔리드 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/751/240/1612096751_0000040.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="모던 솔리드 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">모던 솔리드 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1612096751','VV16001901','11','1607300005','D1512000276','C17022209101677');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1612096751', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101677', conts_divi_cd:'10', rel_no:'1612096751', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'모던 솔리드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612096751', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101677', conts_divi_cd:'10', rel_no:'1612096751', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'모던 솔리드 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1612096751', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612102251', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101676', conts_divi_cd:'10', rel_no:'1612102251', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'심플 패턴 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/251/240/1612102251_0000015.jpg" data-ga-tag="PC_대카하단||MD추천상품||심플 패턴 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/251/240/1612102251_0000008.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="심플 패턴 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">심플 패턴 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1612102251','VV16001901','11','1607300005','D1512000276','C17022209101676');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1612102251', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101676', conts_divi_cd:'10', rel_no:'1612102251', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'심플 패턴 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612102251', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101676', conts_divi_cd:'10', rel_no:'1612102251', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'심플 패턴 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1612102251', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701116344', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101675', conts_divi_cd:'10', rel_no:'1701116344', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 데일리 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/344/240/1701116344_0000002.jpg" data-ga-tag="PC_대카하단||MD추천상품||베이직 데일리 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/344/240/1701116344_0000004.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="베이직 데일리 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">베이직 데일리 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>29,900</strong>원</span></div></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701116344','VV16001901','11','1607300005','D1512000276','C17022209101675');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701116344', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101675', conts_divi_cd:'10', rel_no:'1701116344', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 데일리 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701116344', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101675', conts_divi_cd:'10', rel_no:'1701116344', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 데일리 블라우스', cust_sale_price:29900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701116344', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701126043', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101674', conts_divi_cd:'10', rel_no:'1701126043', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플라워 스트랩 블라우스', cust_sale_price:39900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/043/240/1701126043_0000002.jpg" data-ga-tag="PC_대카하단||MD추천상품||플라워 스트랩 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/043/240/1701126043_0000009.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="플라워 스트랩 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">플라워 스트랩 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>39,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701126043','VV16001901','11','1607300005','D1512000276','C17022209101674');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701126043', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101674', conts_divi_cd:'10', rel_no:'1701126043', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플라워 스트랩 블라우스', cust_sale_price:39900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701126043', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101674', conts_divi_cd:'10', rel_no:'1701126043', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플라워 스트랩 블라우스', cust_sale_price:39900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701126043', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702131349', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101673', conts_divi_cd:'10', rel_no:'1702131349', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플로랄 러플 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/349/240/1702131349_0000002.jpg" data-ga-tag="PC_대카하단||MD추천상품||플로랄 러플 블라우스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/349/240/1702131349_0000003.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="플로랄 러플 블라우스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">플로랄 러플 블라우스</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>49,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1702131349','VV16001901','11','1607300005','D1512000276','C17022209101673');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1702131349', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101673', conts_divi_cd:'10', rel_no:'1702131349', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플로랄 러플 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1702131349', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101673', conts_divi_cd:'10', rel_no:'1702131349', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'플로랄 러플 블라우스', cust_sale_price:49900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1702131349', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+						</ul>
+						<ul class="list">
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612102239', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101672', conts_divi_cd:'10', rel_no:'1612102239', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'루즈핏 빅포켓 자켓', cust_sale_price:109000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/239/240/1612102239_0000001.jpg" data-ga-tag="PC_대카하단||MD추천상품||루즈핏 빅포켓 자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/239/240/1612102239_0000009.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="루즈핏 빅포켓 자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">루즈핏 빅포켓 자켓</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>109,000</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1612102239','VV16001901','11','1607300005','D1512000276','C17022209101672');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1612102239', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101672', conts_divi_cd:'10', rel_no:'1612102239', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'루즈핏 빅포켓 자켓', cust_sale_price:109000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1612102239', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101672', conts_divi_cd:'10', rel_no:'1612102239', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'루즈핏 빅포켓 자켓', cust_sale_price:109000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1612102239', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701124332', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101671', conts_divi_cd:'10', rel_no:'1701124332', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 루즈핏 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/332/240/1701124332_0000001.jpg" data-ga-tag="PC_대카하단||MD추천상품||베이직 루즈핏 자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/332/240/1701124332_0000003.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="베이직 루즈핏 자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">베이직 루즈핏 자켓</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>89,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701124332','VV16001901','11','1607300005','D1512000276','C17022209101671');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701124332', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101671', conts_divi_cd:'10', rel_no:'1701124332', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 루즈핏 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701124332', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101671', conts_divi_cd:'10', rel_no:'1701124332', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 루즈핏 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701124332', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701116360', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101670', conts_divi_cd:'10', rel_no:'1701116360', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 테일러드 자켓', cust_sale_price:59900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/360/240/1701116360_0000004.jpg" data-ga-tag="PC_대카하단||MD추천상품||베이직 테일러드 자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/360/240/1701116360_0000008.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="베이직 테일러드 자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">베이직 테일러드 자켓</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>59,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701116360','VV16001901','11','1607300005','D1512000276','C17022209101670');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701116360', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101670', conts_divi_cd:'10', rel_no:'1701116360', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 테일러드 자켓', cust_sale_price:59900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701116360', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101670', conts_divi_cd:'10', rel_no:'1701116360', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'베이직 테일러드 자켓', cust_sale_price:59900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701116360', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701119534', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101669', conts_divi_cd:'10', rel_no:'1701119534', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'파스텔 오버핏 롱자켓', cust_sale_price:79900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/534/240/1701119534_0000003.jpg" data-ga-tag="PC_대카하단||MD추천상품||파스텔 오버핏 롱자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/534/240/1701119534_0000010.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="파스텔 오버핏 롱자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">파스텔 오버핏 롱자켓</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>79,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701119534','VV16001901','11','1607300005','D1512000276','C17022209101669');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701119534', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101669', conts_divi_cd:'10', rel_no:'1701119534', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'파스텔 오버핏 롱자켓', cust_sale_price:79900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701119534', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101669', conts_divi_cd:'10', rel_no:'1701119534', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'파스텔 오버핏 롱자켓', cust_sale_price:79900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701119534', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701117032', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101668', conts_divi_cd:'10', rel_no:'1701117032', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 체크패턴 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/032/240/1701117032_0000005.jpg" data-ga-tag="PC_대카하단||MD추천상품||클래식 체크패턴 자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/032/240/1701117032_0000012.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="클래식 체크패턴 자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">클래식 체크패턴 자켓</span><div class="box_price"><div class="cont_price"><div class="price01"></div><span class="c_price"><span class="price_nm">판매가</span><strong>89,900</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c08">품절</span></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1701117032','VV16001901','11','1607300005','D1512000276','C17022209101668');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1701117032', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101668', conts_divi_cd:'10', rel_no:'1701117032', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 체크패턴 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1701117032', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000276', tr_yn:'Y', conts_dist_no:'C17022209101668', conts_divi_cd:'10', rel_no:'1701117032', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'클래식 체크패턴 자켓', cust_sale_price:89900,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1701117032', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+			
+				</ul>
+			</div>
+						
+		</div>
+
+
+
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000277" class="area_lv1">
+
+	<!-- 
+	내용 : 대분류 상품평베스트
+ -->
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="box_comment_best">
+
+			<div class="title">
+				<h3 class="tit_h3_bg01"><span>상품평 베스트<strong class="txt_en"></strong> </span></h3>
+			</div>
+
+			<!-- 5단 상품 리스트 -->
+			<div class="list_product01 size05 d_prd_over">
+				<ul class="list">
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1611073323', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319310', conts_divi_cd:'10', rel_no:'1611073323', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 패딩 베스트', cust_sale_price:15000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/323/240/1611073323_0000021.jpg" data-ga-tag="PC_대카하단||상품평BEST||데일리 패딩 베스트"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/323/240/1611073323_0000030.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="데일리 패딩 베스트"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">데일리 패딩 베스트</span><div class="box_price"><div class="cont_price"><div class="price01"><del class="prime">35,900</del></div><span class="c_price"><span class="price_nm">판매가</span><strong>15,000</strong>원</span></div></div><div class="box_grade"><div class="set_grade01"><span style="width:97%">97점</span></div><strong class="set_conunt_review">(46)<span class="ir">개의 상품평</span></strong></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1611073323','VV16001901','11','1607300005','D1512000277','C17030209319310');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1611073323', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319310', conts_divi_cd:'10', rel_no:'1611073323', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 패딩 베스트', cust_sale_price:15000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1611073323', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319310', conts_divi_cd:'10', rel_no:'1611073323', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 패딩 베스트', cust_sale_price:15000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1611073323', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1611079417', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319311', conts_divi_cd:'10', rel_no:'1611079417', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'슬림 롱 패딩', cust_sale_price:30000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/417/240/1611079417_0000022.jpg" data-ga-tag="PC_대카하단||상품평BEST||슬림 롱 패딩"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/417/240/1611079417_0000011.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="슬림 롱 패딩"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">슬림 롱 패딩</span><div class="box_price"><div class="cont_price"><div class="price01"><del class="prime">89,900</del></div><span class="c_price"><span class="price_nm">판매가</span><strong>30,000</strong>원</span></div></div><div class="box_flag"><span class="flag_icon c02">무료배송</span></div><div class="box_grade"><div class="set_grade01"><span style="width:98%">98점</span></div><strong class="set_conunt_review">(34)<span class="ir">개의 상품평</span></strong></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1611079417','VV16001901','11','1607300005','D1512000277','C17030209319311');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1611079417', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319311', conts_divi_cd:'10', rel_no:'1611079417', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'슬림 롱 패딩', cust_sale_price:30000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1611079417', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319311', conts_divi_cd:'10', rel_no:'1611079417', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'슬림 롱 패딩', cust_sale_price:30000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1611079417', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1609022963', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319312', conts_divi_cd:'10', rel_no:'1609022963', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'프릴 하이넥 티셔츠', cust_sale_price:7000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/963/240/1609022963_0000029.jpg" data-ga-tag="PC_대카하단||상품평BEST||프릴 하이넥 티셔츠"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/963/240/1609022963_0000022.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="프릴 하이넥 티셔츠"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">프릴 하이넥 티셔츠</span><div class="box_price"><div class="cont_price"><div class="price01"><del class="prime">19,900</del></div><span class="c_price"><span class="price_nm">판매가</span><strong>7,000</strong>원</span></div></div><div class="box_grade"><div class="set_grade01"><span style="width:97%">97점</span></div><strong class="set_conunt_review">(28)<span class="ir">개의 상품평</span></strong></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1609022963','VV16001901','11','1607300005','D1512000277','C17030209319312');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1609022963', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319312', conts_divi_cd:'10', rel_no:'1609022963', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'프릴 하이넥 티셔츠', cust_sale_price:7000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1609022963', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319312', conts_divi_cd:'10', rel_no:'1609022963', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'프릴 하이넥 티셔츠', cust_sale_price:7000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1609022963', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1608014828', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319313', conts_divi_cd:'10', rel_no:'1608014828', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'빈티지 데님 자켓', cust_sale_price:25000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/828/240/1608014828_0000009.jpg" data-ga-tag="PC_대카하단||상품평BEST||빈티지 데님 자켓"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/828/240/1608014828_0000008.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="빈티지 데님 자켓"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">빈티지 데님 자켓</span><div class="box_price"><div class="cont_price"><div class="price01"><del class="prime">49,900</del></div><span class="c_price"><span class="price_nm">판매가</span><strong>25,000</strong>원</span></div></div><div class="box_grade"><div class="set_grade01"><span style="width:99%">99점</span></div><strong class="set_conunt_review">(27)<span class="ir">개의 상품평</span></strong></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1608014828','VV16001901','11','1607300005','D1512000277','C17030209319313');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1608014828', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319313', conts_divi_cd:'10', rel_no:'1608014828', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'빈티지 데님 자켓', cust_sale_price:25000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1608014828', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319313', conts_divi_cd:'10', rel_no:'1608014828', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'빈티지 데님 자켓', cust_sale_price:25000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1608014828', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+
+					<li>
+						<a href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1609024536', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319314', conts_divi_cd:'10', rel_no:'1609024536', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 베이직 슬랙스', cust_sale_price:10000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});" class="links" data-imgsrc="//www.elandmall.com/upload/prd/img/536/240/1609024536_0000024.jpg" data-ga-tag="PC_대카하단||상품평BEST||데일리 베이직 슬랙스"><div class="thumb"><span><img src="//www.elandmall.com/upload/prd/img/536/240/1609024536_0000015.jpg" width="186" height="186" onError="this.src='//www.elandmall.com/images/pcweb/common/186_noimg.gif'" alt="데일리 베이직 슬랙스"/></span></div><div class="cont"><span class="brand_nm">미쏘(MIXXO)</span><span class="prod_nm">데일리 베이직 슬랙스</span><div class="box_price"><div class="cont_price"><div class="price01"><del class="prime">49,900</del></div><span class="c_price"><span class="price_nm">판매가</span><strong>10,000</strong>원</span></div></div><div class="box_grade"><div class="set_grade01"><span style="width:99%">99점</span></div><strong class="set_conunt_review">(21)<span class="ir">개의 상품평</span></strong></div></div></a><div class="box_opt_link"><a class="opt_like" href="javascript:;" onClick="elandmall.wishlist.addGoodsWish('1609024536','VV16001901','11','1607300005','D1512000277','C17030209319314');"><span>찜하기</span></a><a class="opt01" href="javascript:;" onClick="elandmall.popup.goodsPreview({goods_no:'1609024536', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319314', conts_divi_cd:'10', rel_no:'1609024536', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 베이직 슬랙스', cust_sale_price:10000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm')});"><span>미리보기</span></a><a class="opt02" href="javascript:;" onclick= "elandmall.goods.goDetail({goods_no:'1609024536', vir_vend_no:'VV16001901', sale_shop_divi_cd:'11', disp_ctg_no:'1607300005' ,sale_area_no:'D1512000277', tr_yn:'Y', conts_dist_no:'C17030209319314', conts_divi_cd:'10', rel_no:'1609024536', rel_divi_cd:'10', brand_nm:'미쏘(MIXXO)', goods_nm:'데일리 베이직 슬랙스', cust_sale_price:10000,ga_ctg_nm:$('#_HEADER_TITLE').data('ga_ctg_nm'),target:'_blank'});"><span>새창열기</span></a><a class="opt03" href="javascript:;" onmouseover="elandmall.popup.optNameLayer({goods_no:'1609024536', vir_vend_no :'VV16001901', obj:this})"><span>옵션보기</span></a></div>
+					</li>
+			
+				</ul>
+			</div>
+						
+		</div>
+
+</div><!-- //영역 레벨 끝 -->
+<!-- 영역 레벨 시작  --><div  id="D1512000278" class="area_lv1">
+
+	<!-- 
+	내용 : 대분류 기획전(전체)
+ -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="box_shopping_event">
+
+			<div class="title"><h3 class="tit_h3">쇼핑 기획전</h3></div>
+	
+		<!-- 좌우측 윙 배경컬러 -->
+		<div class="l_deco" style="background:#f9f9f9"></div>
+		<div class="r_deco" style="background:#f9f9f9"></div>
+		<!-- //좌우측 윙 배경컬러 -->
+		<div class="list_thumb_txt01">
+			<ul>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]블라우스&셔츠'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170300000014831', move_cont_no:'1703313266', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/177/00/170300000019177.jpg" alt="[미쏘]블라우스&셔츠" /></div><div class="cont"><strong class="tit">[미쏘]블라우스&셔츠</strong><span class="s_cont">NEW ARRIVAL#1</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]S/S 추천아이템'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000014737', move_cont_no:'1702313143', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/062/00/170200000019062.jpg" alt="[미쏘]S/S 추천아이템" /></div><div class="cont"><strong class="tit">[미쏘]S/S 추천아이템</strong><span class="s_cont">TTT'S PICK</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘] 클리어런스 대전'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000014560', move_cont_no:'1702313068', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/819/00/170200000018819.jpg" alt="[미쏘] 클리어런스 대전" /></div><div class="cont"><strong class="tit">[미쏘] 클리어런스 대전</strong><span class="s_cont">F/W 마지막 구매 찬스</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]트렌치코트'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000014138', move_cont_no:'1702312617', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/230/00/170200000018230.jpg" alt="[미쏘]트렌치코트" /></div><div class="cont"><strong class="tit">[미쏘]트렌치코트</strong><span class="s_cont">트렌치코트 컬렉션</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]플로럴 드레스'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000014084', move_cont_no:'1702312607', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/163/00/170200000018163.jpg" alt="[미쏘]플로럴 드레스" /></div><div class="cont"><strong class="tit">[미쏘]플로럴 드레스</strong><span class="s_cont">TREND IT TEM</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]자켓 vs 자켓'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000013662', move_cont_no:'1702312166', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/567/00/170200000017567.jpg" alt="[미쏘]자켓 vs 자켓" /></div><div class="cont"><strong class="tit">[미쏘]자켓 vs 자켓</strong><span class="s_cont">BEST OF BASIC</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]트렌드 아이템'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000013603', move_cont_no:'1702312099', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/484/00/170200000017484.jpg" alt="[미쏘]트렌드 아이템" /></div><div class="cont"><strong class="tit">[미쏘]트렌드 아이템</strong><span class="s_cont">HOT한 추천 아이템들</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]베이직 이너'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000013132', move_cont_no:'1702311722', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/826/00/170200000016826.jpg" alt="[미쏘]베이직 이너" /></div><div class="cont"><strong class="tit">[미쏘]베이직 이너</strong><span class="s_cont">꼭 필요한 아이템들만</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘] 로맨틱 페미닌룩'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170200000013121', move_cont_no:'1702311714', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/811/00/170200000016811.jpg" alt="[미쏘] 로맨틱 페미닌룩" /></div><div class="cont"><strong class="tit">[미쏘] 로맨틱 페미닌룩</strong><span class="s_cont"></span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]플라워 원피스'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170100000012085', move_cont_no:'1701310894', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/325/00/170100000015325.jpg" alt="[미쏘]플라워 원피스" /></div><div class="cont"><strong class="tit">[미쏘]플라워 원피스</strong><span class="s_cont">사랑스러운 그대에게.</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]기모 데님팬츠'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'170100000011991', move_cont_no:'1701310728', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/184/00/170100000015184.jpg" alt="[미쏘]기모 데님팬츠" /></div><div class="cont"><strong class="tit">[미쏘]기모 데님팬츠</strong><span class="s_cont">겨울에도 따뜻하게!</span></div></a></li>
+
+					<li data-ga-tag='PC_대카하단||쇼핑기획전||[미쏘]크리스마스 에디션'><a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'N',banner_kind_cd:'11' ,conts_form_cd:'110' ,conts_divi_cd:'' ,conts_dist_no:'' ,sale_area_no:'' , rel_divi_cd:'20' , rel_no:'161200000010707', move_cont_no:'1612309631', url:''});"><div class="thumb"><img src="//www.elandmall.com/upload/dspl/banner/11/338/00/161200000013338.jpg" alt="[미쏘]크리스마스 에디션" /></div><div class="cont"><strong class="tit">[미쏘]크리스마스 에디션</strong><span class="s_cont">크리스마스 추천 아이템</span></div></a></li>
+			
+			</ul>
+		</div>
+		
+			<a class="btn_more01" href="javascript:;" onclick="elandmall.shop.goPlanShopMain({disp_ctg_no:'1607300005', disp_ctg_nm:'CLOTHING'})"><span>MORE</span></a>
+		
+	</div>
+ 
+
+</div><!-- //영역 레벨 끝 -->
+
+       <!-- //대분류 영역 분리후 해당 코너 스탁 연결 하기 -->
+       
+</div>
+<!-- //CONTENT -->
+<!-- 공지사항 레이어 2016-10-13 -->
+<div class="lyr_notice" style="left:0;top:450px;display:none;">
+	<div class="wrap" id="span_layer_pop"></div>
+</div>
+<!-- 공지사항 레이어 2016-10-13 -->
+
+
+
+
+
+	</div>
+	<!--- //container -->
+
+
+
+		<!-- footer -->
+		<div id="footer" class="foot_br">
+
+			<!-- 푸터배너 -->
+
+			<!-- 비정형 영역 처리   -->
+			<!-- 
+	내 용 : 푸터배너
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="footer_bnr" style="background:">
+
+			<a href="javascript:;" onclick="elandmall.disp.clickEvent({openwinyn:'N',tr_yn:'Y',banner_kind_cd:'10' ,conts_form_cd:'110' ,conts_divi_cd:'10' ,conts_dist_no:'C17022809269445' ,sale_area_no:'D1607000729' , rel_divi_cd:'20' , rel_no:'170200000014754', move_cont_no:'1702312700', url:''})"><img src="//www.elandmall.com/upload/dspl/banner/10/082/00/170200000019082.jpg" width="1080" height="100" alt="짐웨어" /></a>			
+		
+		</div>
+		<script>
+		if($(".footer_bnr a").size() > 0){
+			$(".footer_bnr a").attr("data-ga-tag","PC_푸터||푸터띠배너||짐웨어");
+		}
+		</script>
+ 
+
+			<!-- //비정형 영역 처리  -->
+
+			<!-- //푸터배너 -->
+			<div class="foot_section">
+				<div class="foot_opt_area">
+					<ul class="foot_opt_list">
+
+
+						<li><a href="https://oneclick.elandretail.com/terms/privacyTerms" target="_blank" title="새창" data-ga-tag='PC_푸터||푸터 리테일소개||개인정보처리방침'><strong>개인정보처리방침</strong></a></li>
+						<li><a href="https://oneclick.elandretail.com/terms/mediaTerms" target="_blank" title="새창" data-ga-tag='PC_푸터||푸터 리테일소개||영상정보처리기기운영, 관리방침'>영상정보처리기기운영, 관리방침</a></li>
+						<li><a href="https://oneclick.elandretail.com/terms/onlineServiceTerms" target="_blank" title="새창" data-ga-tag='PC_푸터||푸터 리테일소개||약관안내'>약관안내</a></li>
+						<li><a href="http://ethic.elandretail.com/" target="_blank" title="새창" data-ga-tag='PC_푸터||푸터 리테일소개||윤리경영'>윤리경영</a></li>
+						<li><a href="https://edi.eland.co.kr/ewstoolkit_install.jsp" target="_blank" title="새창" data-ga-tag='PC_푸터||푸터 리테일소개||전자세금 계산서'>전자세금 계산서</a></li>
+						
+
+
+
+					</ul>
+				</div>
+				<div class="cont">
+					<div class="logo_footer">
+
+						<a href="javascript:;" onclick="javascript:elandmall.hdLink('MALL_MAIN');"><img src="//www.elandmall.com/images/pcweb/header/logo_mixxo_ft.jpg" alt="MIXXO"></a>
+						<div class="logo_footer_qrcode"><img src="//www.elandmall.com/images/pcweb/header/qcode_mixxo.gif" alt="미쏘 모바일 QR CODE"></div>
+
+						
+						
+					</div>
+
+					
+					<div class="foot_context">
+
+						<div class="foot_view">
+							<dl>
+								<dt>(주)이랜드리테일</dt>
+								<dd>대표이사: 정성관/김연배</dd>
+								<dd>주소: 서울특별시 서초구 잠원동 70번지 2호 사업자등록번호: 114-81-01855</dd>
+								<dd>통신판매업 신고번호: 제 2007-서울서초-09998호 <button type="button" class="btn07 c01 ico_arrow04" onclick="window.open('https://goo.gl/qkVbiL')"><span>사업자 정보확인</span></button></dd>
+								<dd>개인정보 보호책임자: 대표이사 김연배</dd>
+								<dd>email: <a href="mailto:webmaster@elandmall.com">webmaster@elandmall.com</a></dd>
+							</dl>
+
+							<div class="copyright">Copyright © Eland Retail. All Rights Reserved.</div>
+						</div>
+
+						
+					</div>
+					<div class="foot_side_opt">
+					
+						<div class="fm_links">
+							<a class="btn_fm_site" href="#" data-ga-tag='PC_푸터||푸터패밀리사이트||'><span>패밀리 사이트 바로가기</span></a>
+							<div class="list_fm_site">
+								<ul class="scroll">
+									<li><a href="http://www.eland.co.kr"    	    			target="blank">이랜드그룹</a></li>
+									<li><a href="https://www.elandretail.com"       			target="blank">이랜드리테일</a></li>
+									<li><a href="http://www.elandeat.com"    	   			    target="blank">이랜드 외식브랜드</a></li>
+									<li><a href="http://www.kensingtonjeju.com"   			    target="blank">켄싱턴제주호텔</a></li>
+									<li><a href="http://www.kensingtonhotel.com"    			target="blank">켄싱턴호텔</a></li>
+									<li><a href="http://www.pic.co.kr/saipan/pic_saipan.php"    target="blank">PIC 호텔</a></li>
+									<li><a href="http://www.kensingtonresort.co.kr"    		    target="blank">켄싱턴리조트</a></li>
+									<li><a href="http://www.bearstown.com/main/main.asp" 	    target="blank">베어스타운</a></li>
+									<li><a href="http://www.tourmall.com" 					    target="blank">투어몰</a></li>
+									<li><a href="http://www.seoulelandfc.com" 					target="blank">서울이랜드FC</a></li>
+									<li><a href="http://www.eworld.kr/main/main.htm"    		target="blank">이월드</a></li>
+									<li><a href="http://cocomong.forkids.kr"  					target="blank">코코몽키즈랜드</a></li>
+									<li><a href="http://www.elandcruise.com"  					target="blank">이크루즈</a></li>
+									<li><a href="http://home.ebs.co.kr/cocomong/main"  			target="blank">올리브스튜디오</a></li>
+									<li><a href="http://www.wapophall.com"  					target="blank">와팝</a></li>
+									
+								</ul>
+							</div>
+						</div>
+						<script type="text/javascript">
+							$(".fm_links").find("li").on("click",function(){
+								$(this).parent().parent().removeClass('active');
+							});
+						</script>
+						
+						<div class="foot_cs">
+							<strong class="foot_cs_tit">고객센터</strong>
+							<strong class="foot_csph">1899-9500</strong>
+							<span>상담시간 : 오전9시~오후6시(토요일, 공휴일은 쉽니다) </span>
+							
+
+							<button type="button" class="foot_cs_btn type03" onclick="elandmall.footer.link.goStaffCert();return false;"><span>임직원 회원가입 / 인증</span></button>
+						</div>
+					</div>
+				</div>
+				<div class="foot_bot">
+					<p><strong>소비자피해보상보험</strong> 고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한 구매 안전서비스를 이용하실 수 있습니다.</p>  
+					<button  onclick="window.open('https://www.usafe.co.kr/usafeShopCheck.asp?com_no=1148101855','newwin','width=550,height=500,top=100')" type="button" class="btn07 c01 ico_arrow04"><span>서비스 가입사실 확인하기</span></button>
+					<ul class="foot_menus">
+						<li><img src="//www.elandmall.com/images/pcweb/common/foot_menu01.png" alt="노사화합 프로그램 우수기업 선정 노동부장관상 수상"></li>
+						<li><img src="//www.elandmall.com/images/pcweb/common/foot_menu02.png" alt="개인정보보호 우수기업선정 행정안전부 장관상 수상"></li>
+						<li><img src="//www.elandmall.com/images/pcweb/common/foot_menu03.png" alt="Norton Secured"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //footer -->
+	</div>
+	<!-- //wrapper -->
+
+
+
+<!-- CRITEO ,TARGETING GATES 트래커 추가 -->	
+
+
+
+
+
+
+
+
+
+<!-- CAFE 24 -->
+<script type='text/javascript'>
+	var cmcJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cscript id='cmclog_script' src='" + cmcJsHost + "iloveccmel.cmclog.cafe24.com/weblog.js?uid=iloveccmel&uname=iloveccmel' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- 리포트2.0 로그분석코드 시작 -->
+<script type="text/javascript">
+var JsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+var uname = escape('이랜드몰');
+document.write(unescape("%3Cscript id='log_script' src='"+JsHost+"iloveccmel.weblog.cafe24.com/weblog.js?uid=iloveccmel&uname="+uname+"' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 리포트2.0  로그분석코드 완료 -->
+<!-- CAFE 24 -->
+</body>
+</html>

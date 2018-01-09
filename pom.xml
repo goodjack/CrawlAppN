@@ -1,0 +1,436 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.eopcon.crawler</groupId>
+	<artifactId>samsungcnt</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>crawler</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<springframework.version>4.0.5.RELEASE</springframework.version>
+		<spring.batch.version>3.0.7.RELEASE</spring.batch.version>
+		<cglib.version>2.2</cglib.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<commons-collection.version>3.2.1</commons-collection.version>
+		<junit.version>4.10</junit.version>
+		<mybatis-spring.version>1.1.1</mybatis-spring.version>
+		<logback.version>1.1.10</logback.version>
+		<org.aspectj-version>1.8.4</org.aspectj-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>${spring.batch.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commmons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-test</artifactId>
+			<version>${spring.batch.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.10.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mozilla</groupId>
+			<artifactId>rhino</artifactId>
+			<version>1.7.7.1</version>
+			<!-- <scope>system</scope> <systemPath>${project.basedir}/lib/rhino-1.7.7.1.jar</systemPath> -->
+		</dependency>
+
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
+
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.0</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons-collection.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.37</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+		
+	
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- selenium-java -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		    <version>2.53.0</version>
+		</dependency>
+		
+		<!-- selenium-server-standalone -->
+ 		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-server-standalone</artifactId>
+		    <version>2.53.0</version>
+		</dependency> 
+		
+		
+ 		<!-- selenium-chrome-driver -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-chrome-driver</artifactId>
+		    <version>3.4.0</version>
+		</dependency>
+		
+		<!-- selenium-server -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-server</artifactId>
+		    <version>3.5.3</version>
+		</dependency>
+
+		<!-- phantomjsdriver -->
+		<dependency>
+		    <groupId>com.github.detro.ghostdriver</groupId>
+		    <artifactId>phantomjsdriver</artifactId>
+		    <version>1.1.0</version>
+		</dependency>
+		
+		
+		<!-- com.amazonaws/aws-java-sdk -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk</artifactId>
+		    <version>1.11.235</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		    <version>2.9.9</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>samsungcnt</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>sources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>sources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<complianceLevel>${java.version}</complianceLevel>
+					<showWeaveInfo>false</showWeaveInfo>
+					<Xlint>ignore</Xlint>
+					<encoding>UTF-8</encoding>
+					<verbose>true</verbose>
+				</configuration>
+				<executions>
+					<execution>
+						<!-- IMPORTANT -->
+						<phase>process-sources</phase>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjrt</artifactId>
+						<version>${org.aspectj-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>${org.aspectj-version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptor>extra-resources/assembly.xml</descriptor>
+					<finalName>${project.build.finalName}</finalName>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<configuration>
+							<descriptor>extra-resources/dev/assembly.xml</descriptor>
+							<finalName>${project.build.finalName}</finalName>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

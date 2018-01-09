@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task" xmlns:batch="http://www.springframework.org/schema/batch" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+			http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.eopcon.crawler.samsungcnt" />
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<import resource="./spring-db.xml" />
+	<!-- <import resource="./spring-sftp.xml"/> -->
+
+	<bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="properties" />
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:config/message/messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
+
+	<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="singleton" value="true" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="properties">
+			<props>
+				<prop key="prop">value</prop>
+			</props>
+		</property>
+		<property name="locations">
+			<list>
+				<value>classpath:config/properties/config.properties</value>
+				<value>classpath:config/properties/script.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+		<property name="jobRepository" ref="jobRepository" />
+	</bean>
+
+	<bean id="jobExplorer" class="org.springframework.batch.core.explore.support.JobExplorerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="jobRegistry" class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+
+	<bean id="jobRegistryBeanPostProcessor" class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<property name="jobRegistry" ref="jobRegistry" />
+	</bean>
+
+	<bean id="jobOperator" class="org.springframework.batch.core.launch.support.SimpleJobOperator">
+		<property name="jobLauncher" ref="jobLauncher" />
+		<property name="jobRepository" ref="jobRepository" />
+		<property name="jobRegistry" ref="jobRegistry" />
+		<property name="jobExplorer" ref="jobExplorer" />
+	</bean>
+
+	<bean id="jobLogListener" class="com.eopcon.crawler.samsungcnt.listener.JobLogListener" />
+	<bean id="jobStepListener" class="com.eopcon.crawler.samsungcnt.listener.JobStepListener" />
+
+	<bean id="jobParametersIncrementer" class="com.eopcon.crawler.samsungcnt.jobscheduler.SimpleJobParametersIncrementer" />
+
+	<bean id="resourcelessTransactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+	<batch:job id="baseJob" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="jobLogListener" />
+		</batch:listeners>
+	</batch:job>
+
+	<batch:step id="baseStep" abstract="true">
+		<batch:listeners>
+			<batch:listener ref="jobStepListener" />
+		</batch:listeners>
+	</batch:step>
+
+	<batch:job id="productJob" parent="baseJob" incrementer="jobParametersIncrementer">
+		<batch:step id="product.step.1" parent="baseStep" next="product.step.2">
+			<batch:tasklet transaction-manager="resourcelessTransactionManager" ref="productListTasklet" />
+		</batch:step>
+		<batch:step id="product.step.2" parent="baseStep">
+			<batch:tasklet transaction-manager="resourcelessTransactionManager" ref="productDetailTasklet" />
+		</batch:step>
+	</batch:job>
+
+	<bean id="taskExecutor" class="org.springframework.core.task.SimpleAsyncTaskExecutor">
+		<property name="concurrencyLimit" value="5" />
+	</bean>
+
+	<bean class="org.springframework.batch.core.scope.StepScope" />
+
+	<beans profile="execute">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+			<property name="transactionManager" ref="resourcelessTransactionManager" />
+		</bean>
+	</beans>
+
+	<beans profile="run">
+		<bean id="jobRepository" class="org.springframework.batch.core.repository.support.JobRepositoryFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="transactionManager" ref="dataSourceTransactionManager" />
+			<property name="isolationLevelForCreate" value="ISOLATION_SERIALIZABLE" />
+			<property name="databaseType" value="MYSQL" />
+			<property name="tablePrefix" value="MCMF_" />
+			<property name="maxVarCharLength" value="1000" />
+		</bean>
+		
+<!-- 	  	<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+			<property name="type" value="MIXXO" />
+			<property name="cronExpression" value="0 40 21 1/1 * ?" />
+		</bean> 
+ 	  
+ 		<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+			<property name="type" value="UNIQLO" />
+			<property name="cronExpression" value="0 0 21 1/1 * ?" />
+		</bean> 
+ 
+ 		<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+			<property name="type" value="SPAO" />
+			<property name="cronExpression" value="0 30 20 1/1 * ?" />
+		</bean>	 	
+
+   		<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+			<property name="type" value="HM" />
+			<property name="cronExpression" value="0 30 22 1/1 * ?" />
+		</bean>  -->
+	 
+<!--        <bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+             <property name="type" value="UNIQLO" />
+             <property name="cronExpression" value="0 0 16 1/1 * ?" />
+         </bean>
+
+         <bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+             <property name="type" value="SPAO" />
+             <property name="cronExpression" value="0 10 18 1/1 * ?" />
+         </bean>  
+
+         <bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+             <property name="type" value="MIXXO" />
+             <property name="cronExpression" value="0 30 16 1/1 * ?" />
+         </bean>
+
+         <bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+             <property name="type" value="HM" />
+             <property name="cronExpression" value="0 30 17 1/1 * ?" />
+         </bean> -->
+	 
+   		<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler">
+			<property name="type" value="HANDSOME" />
+			<property name="cronExpression" value="0 10 15 1/1 * ?" />
+		</bean> 
+  
+<!--     		<bean class="com.eopcon.crawler.samsungcnt.service.ServiceRunScheduler"> -->
+<!-- 			<property name="type" value="ZARA" /> -->
+<!-- 			<property name="cronExpression" value="0 6 16 1/1 * ?" /> -->
+<!-- 		</bean> -->
+
+
+				
+		<!-- Naver Keyword Crawler 스케줄러 관련 설정 추가의 시작 -->
+		<task:annotation-driven executor="asyncExecutor" scheduler="taskScheduler"/>
+		<task:executor id="asyncExecutor" pool-size="1-5" queue-capacity="1000"  rejection-policy="ABORT" />
+		<!-- Naver Keyword Crawler 스케줄러 관련 설정 추가의 끝  -->
+		
+		<task:scheduler id="taskScheduler" pool-size="10" />
+	
+					<!-- BY.HNC START-->
+		<!-- 크롤링된 아이템을 집어 넣을 블로킹 큐 생성. join, sync 자동으로 적용되는 큐 -->
+		<bean id="spaoQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="2000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+		<bean id="mixxoQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="2000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+		<bean id="uniqloQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="2000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+		<bean id="hmQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="5000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+		<bean id="handsomeQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="2000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+		<bean id="zaraQueue" class="java.util.concurrent.ArrayBlockingQueue">
+			<constructor-arg index="0" value="6000" />
+			<constructor-arg index="1" value="true" />
+		</bean>
+	</beans>
+
+</beans>

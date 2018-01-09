@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<tx:annotation-driven transaction-manager="dataSourceTransactionManager" proxy-target-class="true" />
+
+	<bean id="dataSourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${database.driverClassName}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.username}" />
+		<property name="password" value="${database.password}" />
+		<property name="initialSize" value="10" />
+		<property name="minIdle" value="5" />
+		<property name="maxActive" value="20" />
+		<property name="maxWait" value="10000" />
+		<property name="validationQuery" value="${database.validationQuery}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/mybatis/${database.name}.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/mybatis/mapper/${database.name}/sql.xml
+				</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+</beans>

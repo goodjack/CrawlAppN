@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eopcon.crawler.samsungcnt.service.dao.ProductDao">
+
+	<resultMap type="hashmap" id="cateStdMap">
+		<result column="CATE_1" property="cate1" javaType="string" />
+		<result column="CATE_2" property="cate2" javaType="string" />
+		<result column="CATE_3" property="cate3" javaType="string" />
+		<result column="CATE_4" property="cate4" javaType="string" />
+		<result column="STD_CATE_1" property="stdCate1" javaType="string" />
+		<result column="STD_CATE_2" property="stdCate2" javaType="string" />
+		<result column="STD_CATE_3" property="stdCate3" javaType="string" />
+		<result column="STD_CATE_4" property="stdCate4" javaType="string" />
+	</resultMap>
+	
+	<resultMap type="hashmap" id="etcCateMap">
+		<result column="STD_CATE_1" property="stdCate1" javaType="string" />
+		<result column="STD_CATE_2" property="stdCate2" javaType="string" />
+		<result column="STD_CATE_3" property="stdCate3" javaType="string" />
+		<result column="STD_CATE_4" property="stdCate4" javaType="string" />
+		<result column="CATE_NAME_1" property="cateName1" javaType="string" />
+		<result column="CATE_NAME_2" property="cateName2" javaType="string" />
+		<result column="CATE_NAME_3" property="cateName3" javaType="string" />
+		<result column="CATE_NAME_4" property="cateName4" javaType="string" />
+		<result column="TYPE" property="type" javaType="int" />
+	</resultMap>
+	
+	<resultMap type="hashmap" id="closedGoodsMap">
+		<result column="ID" property="id" javaType="long" />
+		<result column="LAST_COLLECT_DAY" property="lastCollectDay" javaType="string" />
+	</resultMap>
+	
+	<resultMap type="hashmap" id="collectDayMap">
+		<result column="COLOR" property="color" javaType="string" />
+		<result column="SIZE" property="size" javaType="string" />
+		<result column="LAST_COLLECT_DAY" property="lastCollectDay" javaType="string" />
+		<result column="COLLECT_DAY" property="collectDay" javaType="string" />
+	</resultMap>
+
+	<select id="selectCateStd" parameterType="goods" resultMap="cateStdMap">
+	<![CDATA[
+		SELECT CATE_1
+			,CATE_2
+			,CATE_3
+			,CATE_4
+			,STD_CATE_1
+			,STD_CATE_2
+			,STD_CATE_3
+			,STD_CATE_4
+		FROM MSCNT_CATE_STD
+		WHERE SITE = #{site, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+	<select id="selectIgnoreMappingCategories" parameterType="hashmap" resultType="string">
+	<![CDATA[
+		SELECT CONCAT(CATE_1, '; ', CATE_2, '; ',  CATE_3) AS KEWORD
+		FROM MSCNT_CATE_STD
+		WHERE SITE = #{site, jdbcType=VARCHAR}
+		GROUP BY CATE_1
+		    ,CATE_2
+		    ,CATE_3
+		HAVING COUNT(DISTINCT CONCAT(STD_CATE_1, '|', STD_CATE_2)) > 1
+	]]>
+	</select>
+	
+	<select id="selectEtcMappingCategories" resultMap="etcCateMap">
+	<![CDATA[
+		 SELECT A.CODE AS STD_CATE_1
+	        ,B.CODE AS STD_CATE_2
+	        ,C.CODE AS STD_CATE_3
+	        ,CASE WHEN COUNT(*) = 1 THEN MAX(D.CODE) 
+	            ELSE MAX(CASE D.CODE_NAME WHEN '미분류' THEN D.CODE END)  
+	         END AS STD_CATE_4
+	        ,MAX(A.CODE_NAME) AS CATE_NAME_1
+	        ,MAX(B.CODE_NAME) AS CATE_NAME_2
+	        ,MAX(C.CODE_NAME) AS CATE_NAME_3
+	        ,CASE WHEN COUNT(*) = 1 THEN MAX(D.CODE_NAME) 
+	            ELSE MAX(CASE D.CODE_NAME WHEN '미분류' THEN '미분류' END)  
+	         END AS CATE_NAME_4
+	        ,3 AS TYPE
+	    FROM MCMF_CODE A
+	    INNER JOIN MCMF_CODE B ON A.GROUP_CODE = B.GROUP_CODE AND A.CODE = B.UPPER_CODE
+	    INNER JOIN MCMF_CODE C ON B.GROUP_CODE = C.GROUP_CODE AND B.CODE = C.UPPER_CODE
+	    INNER JOIN MCMF_CODE D ON C.GROUP_CODE = D.GROUP_CODE AND C.CODE = D.UPPER_CODE
+	    WHERE A.GROUP_CODE = 'CATE'
+	    GROUP BY A.CODE
+	        ,B.CODE
+	        ,C.CODE
+	    HAVING ( COUNT(*) = 1 OR MAX(CASE D.CODE_NAME WHEN '미분류' THEN 1 END) = 1)
+	    UNION ALL
+	    SELECT A.CODE AS STD_CATE_1
+	        ,B.CODE AS STD_CATE_2
+	        ,CASE WHEN COUNT(*) = 1 THEN MAX(C.CODE) 
+	            ELSE MAX(CASE C.CODE_NAME WHEN '미분류' THEN C.CODE END)  
+	         END  AS STD_CATE_3
+	        ,NULL AS STD_CATE_4
+	        ,MAX(A.CODE_NAME) AS CATE_NAME_1
+	        ,MAX(B.CODE_NAME) AS CATE_NAME_2
+	        ,CASE WHEN COUNT(*) = 1 THEN MAX(C.CODE_NAME) 
+	            ELSE MAX(CASE C.CODE_NAME WHEN '미분류' THEN '미분류' END)  
+	         END AS CATE_NAME_3
+	        ,NULL AS CATE_NAME_4
+	        ,CASE WHEN MAX(B.CODE_NAME) = 'OTHERS' AND  MAX(C.CODE_NAME) = '미분류' THEN 1 ELSE 2 END AS TYPE
+	    FROM MCMF_CODE A
+	    INNER JOIN MCMF_CODE B ON A.GROUP_CODE = B.GROUP_CODE AND A.CODE = B.UPPER_CODE
+	    INNER JOIN MCMF_CODE C ON B.GROUP_CODE = C.GROUP_CODE AND B.CODE = C.UPPER_CODE
+	    WHERE A.GROUP_CODE = 'CATE'
+	    AND NOT EXISTS (
+	        SELECT 1 FROM MCMF_CODE D WHERE C.GROUP_CODE = D.GROUP_CODE AND C.CODE = D.UPPER_CODE
+	    )
+	    GROUP BY A.CODE
+	        ,B.CODE
+	    HAVING ( COUNT(*) = 1 OR MAX(CASE C.CODE_NAME WHEN '미분류' THEN 1 END) = 1)
+	]]>
+	</select>
+
+	<select id="selectGoodsLog" parameterType="hashmap" resultType="logs">
+	<![CDATA[
+		SELECT ID 
+			,SITE
+			,ONLINE_GOODS_NUM
+			,GOODS_NUM
+			,VAL_1
+			,VAL_2
+			,VAL_3
+			,VAL_4
+			,VAL_5
+			,VAL_6
+			,VAL_7
+			,VAL_8
+			,VAL_9
+			,VAL_10
+			,LAST_COLLECT_DAY
+			,ERROR_STEP
+		FROM MSCNT_GOODS_LOG
+		WHERE SITE = #{site, jdbcType=VARCHAR}
+		AND ONLINE_GOODS_NUM = #{onlineGoodsNum, jdbcType=VARCHAR}
+	]]>
+	</select>
+
+	<select id="selectNotAppliedGoodsLogs" parameterType="hashmap" resultType="logs">
+	<![CDATA[
+		SELECT ID 
+			,SITE
+			,ONLINE_GOODS_NUM
+			,GOODS_NUM
+			,VAL_1
+			,VAL_2
+			,VAL_3
+			,VAL_4
+			,VAL_5
+			,VAL_6
+			,VAL_7
+			,VAL_8
+			,VAL_9
+			,VAL_10
+			,LAST_COLLECT_DAY
+			,ERROR_STEP
+		FROM MSCNT_GOODS_LOG
+		WHERE SITE = #{site, jdbcType=VARCHAR}
+		AND LAST_COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+		AND APPLIED_YN = 0
+		AND ERROR_NUM NOT IN (410, 1009, 1013)
+		AND ID > #{id, jdbcType=NUMERIC}
+		ORDER BY ID
+		LIMIT #{pageSize, jdbcType=NUMERIC}
+	]]>
+	</select>
+
+	<select id="selectGoodsLogFailCount" parameterType="hashmap" resultType="long">
+	<![CDATA[
+		SELECT COUNT(*) FROM MSCNT_GOODS_LOG
+		WHERE SITE = #{site, jdbcType=VARCHAR}
+		AND LAST_COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+		AND ERROR_NUM NOT IN (0, 410, 1009, 1013)
+	]]>
+	</select>
+	
+	<select id="selectGoodsId" parameterType="hashmap" resultType="long">
+	<![CDATA[
+		SELECT ID FROM MSCNT_GOODS WHERE SITE = #{site, jdbcType=VARCHAR} AND BRAND_CODE = #{brandCode, jdbcType=VARCHAR} AND GOODS_NUM = #{goodsNum, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+	<select id="selectClosedGoods" parameterType="goods" resultMap="closedGoodsMap">
+	<![CDATA[
+		SELECT A.ID
+			,B.LAST_COLLECT_DAY
+		FROM MSCNT_GOODS A
+		INNER JOIN MSCNT_GOODS_LOG_MAPPING B
+		ON A.ID = B.GOODS_ID AND A.SITE = #{site, jdbcType=VARCHAR} AND A.SELL_CLOSE_DT IS NULL
+		INNER JOIN MSCNT_GOODS_LOG C
+		ON B.GOODS_LOG_ID = C.ID AND C.LAST_COLLECT_DAY < #{collectDay, jdbcType=VARCHAR}
+		WHERE NOT EXISTS (
+		    SELECT 1 FROM MSCNT_GOODS_LOG B
+		    INNER JOIN MSCNT_GOODS_LOG_MAPPING C
+		    ON C.GOODS_LOG_ID = B.ID AND B.SITE = #{site, jdbcType=VARCHAR}
+		    AND ((B.ERROR_NUM IN (0, 1013) AND C.LAST_COLLECT_DAY = #{collectDay, jdbcType=VARCHAR} ) OR B.ERROR_NUM NOT IN (0, 1013))
+		    AND B.LAST_COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+		    WHERE A.ID = C.GOODS_ID
+		)
+	]]>
+	</select>
+	
+	<select id="selectSkuId" parameterType="hashmap" resultType="long">
+	<![CDATA[
+		SELECT ID FROM MSCNT_SKU_INFO WHERE GOODS_ID = #{goodsId, jdbcType=VARCHAR} AND SKU_NUM = #{skuNum, jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+	<select id="selectStockHisCollectDays" parameterType="hashmap" resultMap="collectDayMap">
+	<![CDATA[
+		SELECT COLOR
+		    ,SIZE
+		    ,CASE WHEN @group_key = GROUP_KEY THEN @last_collect_day ELSE '' END AS LAST_COLLECT_DAY
+		    ,@last_collect_day := COLLECT_DAY AS COLLECT_DAY
+		    ,@group_key := GROUP_KEY AS GROUP_KEY
+		FROM (
+		    SELECT * FROM (
+		        SELECT COLOR
+		            ,SIZE
+		            ,CONCAT(COLOR, '|', SIZE) AS GROUP_KEY
+		            ,DATE_FORMAT(MAX(COLLECT_DAY), '%Y%m%d') AS COLLECT_DAY
+		        FROM MSCNT_STOCK_HIS
+		        WHERE SKU_ID = #{skuId, jdbcType=NUMERIC} AND COLLECT_DAY < #{collectDay, jdbcType=VARCHAR}
+		        GROUP BY COLOR
+            		,SIZE
+		    ) A
+		    UNION ALL
+		    SELECT * FROM (
+		        SELECT COLOR
+		            ,SIZE
+		            ,CONCAT(COLOR, '|', SIZE) AS GROUP_KEY
+		            ,DATE_FORMAT(COLLECT_DAY, '%Y%m%d') AS COLLECT_DAY
+		        FROM MSCNT_STOCK_HIS
+		        WHERE SKU_ID = #{skuId, jdbcType=NUMERIC} AND COLLECT_DAY >= #{collectDay, jdbcType=VARCHAR}
+		    ) B
+		     ORDER BY COLOR
+	            ,SIZE
+	            ,COLLECT_DAY
+		) A
+		INNER JOIN ( SELECT @group_key := '', @last_collect_day := '' ) B
+		ON 1=1
+	]]>
+	</select>
+
+	<insert id="insertGoodsLog" parameterType="logs">
+	<![CDATA[
+		INSERT INTO MSCNT_GOODS_LOG (
+			SITE
+			,ONLINE_GOODS_NUM
+			,GOODS_NUM
+			,VAL_1
+			,VAL_2
+			,VAL_3
+			,VAL_4
+			,VAL_5
+			,VAL_6
+			,VAL_7
+			,VAL_8
+			,VAL_9
+			,VAL_10
+			,LAST_COLLECT_DAY
+			,ERROR_STEP
+			,ERROR_NUM
+			,ERROR_MESSAGE
+			,APPLIED_YN
+			,JOB_EXECUTION_ID
+		) VALUES (
+			#{site, jdbcType=VARCHAR}
+			,#{onlineGoodsNum, jdbcType=VARCHAR}
+			,#{goodsNum, jdbcType=VARCHAR}
+			,#{val1, jdbcType=VARCHAR}
+			,#{val2, jdbcType=VARCHAR}
+			,#{val3, jdbcType=VARCHAR}
+			,#{val4, jdbcType=VARCHAR}
+			,#{val5, jdbcType=VARCHAR}
+			,#{val6, jdbcType=VARCHAR}
+			,#{val7, jdbcType=VARCHAR}
+			,#{val8, jdbcType=VARCHAR}
+			,#{val9, jdbcType=VARCHAR}
+			,#{val10, jdbcType=VARCHAR}
+			,#{lastCollectDay, jdbcType=VARCHAR}
+			,#{errorStep, jdbcType=NUMERIC}
+			,#{errorNum, jdbcType=NUMERIC}
+			,#{errorMessage, jdbcType=VARCHAR}
+			,#{appliedYn, jdbcType=NUMERIC}
+			,#{jobExecutionId, jdbcType=NUMERIC}
+		)
+	]]>
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateGoodsLog" parameterType="logs">
+	<![CDATA[
+		UPDATE MSCNT_GOODS_LOG
+		SET GOODS_NUM = #{goodsNum, jdbcType=VARCHAR}
+			,VAL_1 = #{val1, jdbcType=VARCHAR}
+			,VAL_2 = #{val2, jdbcType=VARCHAR}
+			,VAL_3 = #{val3, jdbcType=VARCHAR}
+			,VAL_4 = #{val4, jdbcType=VARCHAR}
+			,VAL_5 = #{val5, jdbcType=VARCHAR}
+			,VAL_6 = #{val6, jdbcType=VARCHAR}
+			,VAL_7 = #{val7, jdbcType=VARCHAR}
+			,VAL_8 = #{val8, jdbcType=VARCHAR}
+			,VAL_9 = #{val9, jdbcType=VARCHAR}
+			,VAL_10 = #{val10, jdbcType=VARCHAR}
+			,LAST_COLLECT_DAY = #{lastCollectDay, jdbcType=VARCHAR}
+			,ERROR_STEP = #{errorStep, jdbcType=NUMERIC}
+			,ERROR_NUM = #{errorNum, jdbcType=NUMERIC}
+			,ERROR_MESSAGE = #{errorMessage, jdbcType=VARCHAR}
+			,APPLIED_YN = #{appliedYn, jdbcType=NUMERIC}
+			,JOB_EXECUTION_ID = #{jobExecutionId, jdbcType=NUMERIC}
+		WHERE ID = #{id, jdbcType=NUMERIC}
+	]]>
+	</update>
+	
+	<insert id="insertGoodsLogMapping" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_GOODS_LOG_MAPPING (
+			GOODS_LOG_ID
+			,GOODS_ID
+			,LAST_COLLECT_DAY
+		) VALUES (
+			#{goodsLogId, jdbcType=NUMERIC}
+			,#{goodsId, jdbcType=NUMERIC}
+			,#{lastCollectDay, jdbcType=VARCHAR}
+		)
+	]]>
+	</insert>
+	
+	<update id="updateGoodsLogMapping" parameterType="hashmap">
+	<![CDATA[
+		UPDATE MSCNT_GOODS_LOG_MAPPING
+		SET LAST_COLLECT_DAY = #{lastCollectDay, jdbcType=VARCHAR}
+		WHERE GOODS_LOG_ID = #{goodsLogId, jdbcType=NUMERIC}
+		AND GOODS_ID = #{goodsId, jdbcType=NUMERIC}
+	]]>
+	</update>
+	
+	
+	<insert id="insertGoods" parameterType="goods">
+	<![CDATA[
+		INSERT INTO MSCNT_GOODS (
+			GOODS_NUM
+			,GOODS_CATE_1
+			,GOODS_CATE_2
+			,GOODS_CATE_3
+			,GOODS_CATE_4
+			,ORG_CATE_NAME
+			,PRICE
+			,RELEASE_DT
+			,RELEASE_YEAR
+			,RELEASE_WEEK
+			,SELL_PRD
+			,SELL_CLOSE_DT
+			,MAFT_ORIGIN
+			,BRAND_CODE
+			,SITE
+			,STATUS
+			,REG_ID
+			,REG_DT
+			,UPT_ID
+			,UPT_DT
+		) VALUES (
+			#{goodsNum, jdbcType=VARCHAR}
+			,#{goodsCate1, jdbcType=VARCHAR}
+			,#{goodsCate2, jdbcType=VARCHAR}
+			,#{goodsCate3, jdbcType=VARCHAR}
+			,#{goodsCate4, jdbcType=VARCHAR}
+			,#{orgCateName, jdbcType=VARCHAR}
+			,#{price, jdbcType=NUMERIC}
+			,IFNULL(#{releaseDt, jdbcType=TIMESTAMP}, CAST(NOW() AS DATE))
+			,DATE_FORMAT(IFNULL(#{releaseDt, jdbcType=TIMESTAMP}, CAST(NOW() AS DATE)), '%Y')
+			,WEEK(IFNULL(#{releaseDt, jdbcType=TIMESTAMP}, CAST(NOW() AS DATE)))
+			,#{sellPrd, jdbcType=NUMERIC}
+			,#{sellCloseDt, jdbcType=TIMESTAMP}
+			,#{maftOrigin, jdbcType=VARCHAR}
+			,#{brandCode, jdbcType=VARCHAR}
+			,#{site, jdbcType=VARCHAR}
+			,#{status, jdbcType=NUMERIC}
+			,'SYSTEM'
+			,NOW()
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<update id="updateGoods" parameterType="goods">
+	<![CDATA[
+		UPDATE MSCNT_GOODS
+		SET PRICE = #{price, jdbcType=NUMERIC}
+			,SELL_PRD = #{sellPrd, jdbcType=NUMERIC}
+			,SELL_CLOSE_DT = #{sellCloseDt, jdbcType=TIMESTAMP}
+			,MAFT_ORIGIN = #{maftOrigin, jdbcType=VARCHAR}
+			,UPT_ID = 'SYSTEM'
+			,UPT_DT = NOW()
+		WHERE 1=1
+		AND ID = #{id, jdbcType=NUMERIC}
+	]]>
+	</update>
+	
+	<update id="updateGoodsCloseDay" parameterType="hashmap">
+	<![CDATA[
+		UPDATE  MSCNT_GOODS
+		SET SELL_CLOSE_DT = STR_TO_DATE(#{collectDay, jdbcType=VARCHAR}, '%Y%m%d') 
+		    ,SELL_PRD = DATEDIFF(STR_TO_DATE(#{collectDay, jdbcType=VARCHAR}, '%Y%m%d'), RELEASE_DT) + 1
+		WHERE ID = #{id, jdbcType=NUMERIC}
+	]]>
+	</update>
+	
+	<insert id="insertSkuInfo" parameterType="sku">
+	<![CDATA[
+		INSERT INTO MSCNT_SKU_INFO (
+			GOODS_ID
+			,SKU_NUM
+			,SKU_NAME
+			,COLOR
+			,COLLECT_URL
+			,GOODS_IMAGE
+			,REG_ID
+			,REG_DT
+			,UPT_ID
+			,UPT_DT
+		) VALUES (
+			#{goodsId, jdbcType=NUMERIC}
+			,#{skuNum, jdbcType=VARCHAR}
+			,#{skuName, jdbcType=VARCHAR}
+			,#{color, jdbcType=VARCHAR}
+			,#{collectURL, jdbcType=VARCHAR}
+			,#{goodsImage, jdbcType=VARCHAR}
+			,'SYSTEM'
+			,NOW()
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<update id="updateSkuInfo" parameterType="sku">
+	<![CDATA[
+		UPDATE MSCNT_SKU_INFO
+		SET SKU_NAME = #{skuName, jdbcType=VARCHAR}
+			,COLOR = #{color, jdbcType=VARCHAR}
+			,COLLECT_URL = #{collectURL, jdbcType=VARCHAR}
+			,GOODS_IMAGE = #{goodsImage, jdbcType=VARCHAR}
+			,UPT_ID = 'SYSTEM'
+			,UPT_DT = NOW()
+		WHERE ID = #{id, jdbcType=NUMERIC}
+	]]>
+	</update>
+
+	<insert id="insertGoodsPriceHis" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_GOODS_PRICE_HIS (
+			GOODS_ID
+			,COLLECT_DAY
+			,COLLECT_YEAR
+			,COLLECT_WEEK
+			,PRICE
+			,REG_ID
+			,REG_DT
+		) SELECT #{goodsId, jdbcType=NUMERIC}
+			,A.COLLECT_DAY
+			,DATE_FORMAT(A.COLLECT_DAY, '%Y')
+			,WEEK(A.COLLECT_DAY)
+			,A.PRICE
+			,'SYSTEM'
+			,NOW()
+		FROM (
+		    SELECT #{collectDay, jdbcType=VARCHAR} AS COLLECT_DAY, #{price, jdbcType=NUMERIC} AS PRICE
+		) A 
+		LEFT OUTER JOIN (
+		    SELECT DATE_FORMAT(COLLECT_DAY, '%Y%m%d') AS LAST_COLLECT_DAY, PRICE
+		    FROM MSCNT_GOODS_PRICE_HIS
+		    WHERE GOODS_ID = #{goodsId, jdbcType=NUMERIC}
+		    AND COLLECT_DAY <= #{collectDay, jdbcType=VARCHAR}
+		    ORDER BY COLLECT_DAY DESC
+		    LIMIT 1
+		) B
+		ON 1=1
+		WHERE B.LAST_COLLECT_DAY IS NULL 
+		OR (B.LAST_COLLECT_DAY < A.COLLECT_DAY AND B.PRICE <> A.PRICE)
+	]]>
+	</insert>
+
+	<delete id="deleteGoodsPriceHis" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_GOODS_PRICE_HIS WHERE GOODS_ID = #{goodsId, jdbcType=NUMERIC} AND COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+	]]>
+	</delete>
+
+	<insert id="insertBestItemHis" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_BEST_ITEM_HIS (
+			SKU_ID
+			,COLLECT_DAY
+			,COLLECT_YEAR
+			,COLLECT_WEEK
+			,BEST_ITEM_YN
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{skuId, jdbcType=NUMERIC}
+			,#{collectDay, jdbcType=VARCHAR}
+			,DATE_FORMAT(#{collectDay, jdbcType=VARCHAR}, '%Y')
+			,WEEK(#{collectDay, jdbcType=VARCHAR})
+			,#{bestItemYn, jdbcType=NUMERIC}
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+
+	<delete id="deleteBestItemHis" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_BEST_ITEM_HIS WHERE SKU_ID = #{skuId, jdbcType=NUMERIC} AND COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+	]]>
+	</delete>
+
+	<insert id="insertGoodComment" parameterType="comment">
+	<![CDATA[
+		INSERT INTO MSCNT_GOOD_COMMENT (
+			GOODS_ID
+			,GOODS_COMMENT
+			,GOODS_RATING
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{goodsId, jdbcType=NUMERIC}
+			,#{goodsComment, jdbcType=VARCHAR}
+			,#{goodsRating, jdbcType=VARCHAR}
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+
+	<delete id="deleteGoodComment" parameterType="long">
+	<![CDATA[
+		DELETE FROM MSCNT_GOOD_COMMENT WHERE GOODS_ID = #{goodsId, jdbcType=NUMERIC}
+	]]>
+	</delete>
+
+	<insert id="insertSkuDiscountHis" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_SKU_DISCOUNT_HIS (
+			SKU_ID
+			,COLLECT_DAY
+			,COLLECT_YEAR
+			,COLLECT_WEEK
+			,DISCOUNT_PRICE
+			,DISCOUNT_RATE
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{skuId, jdbcType=NUMERIC}
+			,#{collectDay, jdbcType=VARCHAR}
+			,DATE_FORMAT(#{collectDay, jdbcType=VARCHAR}, '%Y')
+			,WEEK(#{collectDay, jdbcType=VARCHAR})
+			,#{discountPrice, jdbcType=NUMERIC}
+			,#{discountRate, jdbcType=NUMERIC}
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+
+	<delete id="deleteSkuDiscountHis" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_SKU_DISCOUNT_HIS WHERE SKU_ID = #{skuId, jdbcType=NUMERIC} AND COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+	]]>
+	</delete>
+
+	<insert id="insertSkuMaterials" parameterType="materials">
+	<![CDATA[
+		INSERT INTO MSCNT_SKU_MATERIALS (
+			SKU_ID
+			,COLOR
+			,GOODS_COMPOSED
+			,MATERIALS
+			,RATIO
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{skuId, jdbcType=NUMERIC}
+			,#{color, jdbcType=VARCHAR}
+			,#{goodsComposed, jdbcType=VARCHAR}
+			,#{materials, jdbcType=VARCHAR}
+			,#{ratio, jdbcType=VARCHAR}
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+	
+	<delete id="deleteSkuMaterials" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_SKU_MATERIALS WHERE SKU_ID = #{skuId, jdbcType=NUMERIC}
+	]]>
+	</delete>
+	
+	<insert id="insertColorSize" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_COLOR_SIZE (
+			SKU_ID
+			,COLOR
+			,SIZE
+			,REG_ID
+			,REG_DT
+		) SELECT 
+			#{skuId, jdbcType=NUMERIC}
+			,#{color, jdbcType=VARCHAR}
+			,#{goodsSize, jdbcType=VARCHAR}
+			,'SYSTEM'
+			,NOW()
+		FROM DUAL
+		WHERE NOT EXISTS (
+			SELECT 1 FROM MSCNT_COLOR_SIZE A
+			WHERE SKU_ID = #{skuId, jdbcType=NUMERIC}
+			AND COLOR = #{color, jdbcType=VARCHAR}
+			AND SIZE = #{goodsSize, jdbcType=VARCHAR}
+		)
+	]]>
+	</insert>
+	
+
+	<insert id="insertStockHis" parameterType="stock">
+	<![CDATA[
+		INSERT INTO MSCNT_STOCK_HIS (
+			SKU_ID
+			,COLLECT_DAY
+			,COLLECT_YEAR
+			,COLLECT_WEEK
+			,COLOR
+			,SIZE
+			,STOCK_AMOUNT
+			,OPEN_MARKET_STOCK_AMOUNT
+			,SELL_AMOUNT
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{skuId, jdbcType=NUMERIC}
+			,#{collectDay, jdbcType=VARCHAR}
+			,DATE_FORMAT(#{collectDay, jdbcType=VARCHAR}, '%Y')
+			,WEEK(#{collectDay, jdbcType=VARCHAR})
+			,#{color, jdbcType=VARCHAR}
+			,#{size, jdbcType=VARCHAR}
+			,#{stockAmount, jdbcType=NUMERIC}
+			,#{openMarketStockAmount, jdbcType=NUMERIC}
+			,0
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+	
+	<update id="updateStockHisSellAmount" parameterType="hashmap">
+	<![CDATA[
+		UPDATE MSCNT_STOCK_HIS A
+		LEFT OUTER JOIN MSCNT_STOCK_HIS B
+		ON A.SKU_ID = B.SKU_ID
+		AND A.COLOR = B.COLOR
+		AND A.SIZE = B.SIZE
+		AND B.COLLECT_DAY = #{lastCollectDay, jdbcType=VARCHAR}
+		SET A.SELL_AMOUNT = IFNULL(B.STOCK_AMOUNT, A.STOCK_AMOUNT) - A.STOCK_AMOUNT
+		WHERE 1=1
+		AND A.SKU_ID = #{skuId, jdbcType=NUMERIC}
+		AND A.COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+		AND A.COLOR = #{color, jdbcType=VARCHAR}
+		AND A.SIZE = #{goodsSize, jdbcType=VARCHAR}
+	]]>
+	</update>
+	
+	<update id="updateStockHis" parameterType="stock">
+	<![CDATA[
+		UPDATE MSCNT_STOCK_HIS
+		SET STOCK_AMOUNT = #{stockAmount, jdbcType=NUMERIC}
+			,OPEN_MARKET_STOCK_AMOUNT = #{openMarketStockAmount, jdbcType=NUMERIC}
+			,REG_ID = 'SYSTEM'
+			,REG_DT = NOW()
+		WHERE SKU_ID = #{skuId, jdbcType=NUMERIC}
+		AND COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+		AND COLOR = #{color, jdbcType=VARCHAR}
+		AND SIZE = #{size, jdbcType=VARCHAR}
+	]]>
+	</update>
+
+	<delete id="deleteStockHis" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_STOCK_HIS WHERE SKU_ID = #{skuId, jdbcType=NUMERIC} AND COLLECT_DAY = #{collectDay, jdbcType=VARCHAR}
+	]]>
+	</delete>
+	
+	<insert id="insertCateMappingFail" parameterType="hashmap">
+	<![CDATA[
+		INSERT INTO MSCNT_CATE_MAPPING_FAIL (
+			GOODS_ID
+			,CATE_1
+			,CATE_2
+			,CATE_3
+			,CATE_4
+			,REG_ID
+			,REG_DT
+		) VALUES (
+			#{goodsId, jdbcType=NUMERIC}
+			,#{cate1, jdbcType=VARCHAR}
+			,#{cate2, jdbcType=VARCHAR}
+			,#{cate3, jdbcType=VARCHAR}
+			,#{cate4, jdbcType=VARCHAR}
+			,'SYSTEM'
+			,NOW()
+		)
+	]]>
+	</insert>
+	
+	<delete id="deleteCateMappingFail" parameterType="hashmap">
+	<![CDATA[
+		DELETE FROM MSCNT_CATE_MAPPING_FAIL WHERE GOODS_ID = #{goodsId, jdbcType=NUMERIC}
+	]]>
+	</delete>
+	
+	<insert id="insertSearchKeyword" parameterType="naverKeyword">
+	<![CDATA[
+		INSERT INTO MSCNT_COLT_SEARCH_KEYWORD (
+			START_DT
+			,END_DT
+			,COLLECT_DAY
+			,SEARCH_KEYWORD
+			,GOODS_CATE_1
+			,GOODS_CATE_2
+			,GOODS_CATE_3
+			,GOODS_CATE_4
+			,CNT
+			,RANK
+			,RANK_CHANGE
+			,ORIGIN_CODE
+			,REG_DT
+		) VALUES (
+			#{startDay}
+			,#{endDay}
+			,#{collectDay}
+			,#{keyword}
+			,#{cate1}
+			,#{cate2}
+			,#{cate3}
+			,#{cate4}
+			,#{cnt}
+			,#{rank}
+			,#{rankChange}
+			,#{originCode}
+			,NOW()
+		)
+	]]>
+	</insert>
+
+</mapper>

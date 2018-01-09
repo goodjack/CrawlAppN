@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="console-appender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+    		<!-- <charset>euc-kr</charset> -->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level]  [%thread]| %C{36}.%M [%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="batch-appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${app.log.dir}/batch.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${app.log.dir}/logback/%d{yyyy/MM,aux}/batch.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level][%thread] | %C{36}.%M [%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="file-thread-appender" class="ch.qos.logback.classic.sift.SiftingAppender">
+		<!-- This is MDC value -->
+		<!-- We will assign a value to 'logFileName' via Java code -->
+		<discriminator>
+			<key>location</key>
+			<defaultValue>common</defaultValue>
+		</discriminator>
+		<sift>
+			<!-- A standard RollingFileAppender, the log file is based on 'logFileName' at runtime -->
+			<appender name="file-${location}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+				<file>${app.log.dir}/${location}.log</file>
+				<!-- <file>C:/temp/Logs/${location}.log</file> -->
+				<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+					<Pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread]| %C{36}.%M [%L] - %msg%n</Pattern>
+				</encoder>
+				<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+					<fileNamePattern>${app.log.dir}/logback/%d{yyyy/MM/dd,aux}/${location}.%d{yyyy-MM-dd}.log</fileNamePattern>
+					<!-- <fileNamePattern>C:/temp/Logs/logback/%d{yyyy/MM,aux}/${location}.%d{yyyy-MM-dd}.log</fileNamePattern> -->
+					<maxHistory>30</maxHistory>
+				</rollingPolicy>
+			</appender>
+		</sift>
+	</appender>
+	
+	<logger name="commonLogger" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="file-thread-appender" />
+	</logger>
+    
+    <logger name="batchLogger" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="batch-appender" />
+	</logger>
+
+	<logger name="com.eopcon.crawler.samsungcnt" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console-appender" />
+	</logger>
+	
+	<logger name="org.springframework.core">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework.beans">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.springframework.context">
+		<level value="INFO" />
+	</logger>
+	
+	<logger name="org.springframework.jdbc.datasource">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="com.ibatis">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="java.sql" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="file-thread-appender" />
+	</logger>
+
+	<logger name="org.apache">
+		<level value="ERROR" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<level value="ERROR" />
+		<appender-ref ref="console-appender" />
+	</root>
+</configuration>

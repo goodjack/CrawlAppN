@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<bean id="imageUploader" class="com.eopcon.crawler.samsungcnt.service.ImageUploader" />
+
+	<bean id="localFileService"
+		class="com.eopcon.crawler.samsungcnt.common.file.service.LocalFileService" />
+
+	<bean id="sessionFactory" class="com.eopcon.crawler.samsungcnt.common.file.factory.SftpSessionFactory">
+		<property name="host" value="${file.remote.host}" />
+		<property name="port" value="${file.remote.port}" />
+		<property name="username" value="${file.remote.user}" />
+		<property name="password" value="${file.remote.password}" />
+		<property name="privateKeyLocation" value="${file.remote.privateKeyLocation}" />
+	</bean>
+
+	<bean id="pooledSessionFacotry"
+		class="com.eopcon.crawler.samsungcnt.common.file.factory.PooledSessionFacotry">
+		<constructor-arg index="0" ref="sessionFactory" />
+	</bean>
+
+	<bean id="remoteFileService" class="com.eopcon.crawler.samsungcnt.common.file.service.SftpFileService">
+		<property name="facotry" ref="pooledSessionFacotry" />
+	</bean>
+
+</beans>

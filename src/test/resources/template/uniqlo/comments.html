@@ -1,0 +1,1021 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>  
+<link href="/css/goods-popup.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/common/css/lecs/uniqlo.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/common/css/lecs/top.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="/common/js/lecs/lib.js" type="text/javascript"></script>
+	<link href="/common/css/lecs//kr_default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/common/css/lecs/kr_l4.css" rel="stylesheet" type="text/css" media="all" />
+
+	<script type="text/javascript" src="/common/js/common.js"></script>
+	<script type="text/javascript" src="/common/js/lotte.util.js"></script>
+	<script type="text/javascript" src="/common/js/design.js"></script>
+	<script type="text/javascript" src="/common/js/link.js"></script>
+</head>
+
+
+
+
+    
+    
+        
+    
+
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+var count=0;
+    $(document).ready(function() {
+
+    	//HeightResize(0);
+        
+        $("#btn_photoC_view").css("cursor", "pointer");
+        click_btn_photoC_view = function(target){
+            fn_viewImageGdasInfo(target, 1,0,'storeNo=22&siteNo=9&goodsNo=UQ31069457&orderType=1&pageIdx=1&currentPage=1');
+        };
+    
+    
+
+        
+        $(".access_icon_photo").each(function(){
+            var id = $(this).attr("listId");
+            $(this).click(function(e){
+                showQna(id);
+            }).css("cursor", "pointer");
+        });
+
+        
+        $(".access_btn_report").each(function(){
+            $(this).click(function(e){
+            	 
+            			
+               			return;
+          		
+           }).css("cursor", "pointer");
+        });
+
+        
+        parent.$("#access_btn_bReport").click(function(e){
+          //alert('assessmentNo'+assessmentNo);
+			if(count==0){
+				count=1;
+            	$("#formAssessment").attr("action", "/displayDetail/createBadAssessment.lecs");
+            	$("#formAssessment").attr("method", "get");
+            	if($("#declareAcceptType").val() == "") {
+            		alert("불량글 신고유형을 선택해주시기 바랍니다.");   
+            		//$("input[name='_declareAcceptType']").get(0).focus();
+            		count=0;
+                	return;
+            	}
+            	if(document.formAssessment.length != null)
+            		IframeSubmitter.submit(document.formAssessment,  "createBadAssessmentCallback", "submitFrame", true);
+			}
+        }).mouseover(function(e){
+            ImageOver(this);
+        }).mouseout(function(e){
+            ImageOut(this);
+        }).css("cursor", "pointer");
+        
+        parent.$("input[name='_declareAcceptType']").each(function(){ 
+            parent.$(this).click(function(e){
+                	count=0;
+            		$("#declareAcceptType").val(parent.$(this).val());
+            });
+        });
+        
+
+
+        
+       // updateGoodsAssessmentTotalCnt();
+
+    });
+    
+    
+    hideBadAssessmentDiv = function(){
+        $("#assessmentNo").val("");
+        $("#declareAcceptType").val("");
+
+        parent.$("input[name='_declareAcceptType']").each(function(){
+            if(parent.$(this).attr("checked")){
+                parent.$(this).attr("checked", false);
+            }
+        });
+        parent.$("#b_report").hide();
+    };
+    
+    
+    
+    createBadAssessmentCallback = function(result){
+        // 성공시( submit iframe에 오류메세지가 없는경우. 다른 확인 방법이 있을경우 수정필요
+       if(result.success) {
+        	alert("불량글로 신고되었습니다.");
+           parent.document.getElementById('w02').style.display='none'
+            parent.$("iframe[name=submitFrame]").attr("src", "about:blank");
+           $("#customer_comment_inner").load("/displayDetail/listGoodsAssessment.lecs?nolayout=yes&storeNo=22&siteNo=9&goodsNo=UQ31069457&currentPage=1&orderType=" + $("#orderType").val());
+
+            //$("#btn_report" + $(".tit-on span").attr("listId")).attr("alreadyAdd", "Y");
+
+        } else {
+        	alert("신고하기가 실패하였습니다.");
+        }
+    };
+
+
+	var ifrContentsTimer;
+	function resizeRetry(){
+		if(document.body.readyState == "complete"){
+			clearInterval(ifrContentsTimer);
+		}else{
+			resizeFrame();
+		}
+	}
+
+	function resizeFrame(){
+		self.resizeTo(document.body.scrollWidth + (document.body.offsetWidth-document.body.clientWidth),parseInt(document.body.scrollHeight)+10);
+	}
+
+	function abspos(e){
+	    this.x = e.clientX/2 + (parent.document.documentElement.scrollLeft?parent.document.documentElement.scrollLeft:parent.document.body.scrollLeft);
+	    this.y = e.clientY + (parent.document.documentElement.scrollTop?parent.document.documentElement.scrollTop:parent.document.body.scrollTop);
+	     return this;
+	}
+
+
+	function itemClick(e){
+	
+			alert("불량글 신고하기를 하려면  로그인이 필요합니다. \n로그인 후  신고해주시기  바랍니다.");
+			goLogin_Ass();   
+			return;
+	
+	}
+	function makeUrl(url){
+		var from = "FROM=www";
+		if (url.indexOf("?")!=-1){
+			url = url+"&"+from;
+		}
+		else {
+			url = url+"?"+from;
+		}
+		return url;
+	}		
+	function goLogin_Ass(url) {
+		if(url == null || typeof url == 'undefined') { 
+			var url1 = (parent.document.location).toString();
+			url = url1;
+		}
+		//url 인코딩
+		url = makeUrl(url);
+		showWindowsPopup("https://secure.uniqlo.kr//member/SSOLogin.lecs?returnurl=" + encodeURIComponent(url), 500, 480);
+	}
+	/* 20110902 함수 중복 선언되어 있음 
+	function resizeFrame(ifr_id,re){
+		var ifr = parent.document.getElementById(ifr_id);
+		var innerBody = ifr.contentWindow.document.body;
+		var innerHeight = parent.innerBody.scrollHeight + (parent.innerBody.offsetHeight - parent.innerBody.clientHeight);
+
+		if(ifr.style.height != innerHeight){
+				ifr.style.height = innerHeight;
+		}
+		if(!re){
+			try{
+				innerBody.attachEvent('onclick', parent.do_resize);
+				innerBody.attachEvent('onkeyup',parent.do_resize);
+			}catch(e){
+				innerBody.addEventListner("click", parent.do_resize, false);
+				innerBody.addEventListner("keyup", parent.do_resize, false);
+			}
+		}
+	} **/
+	
+	function memberClick(){
+		alert("자신의 상품평은 추천할 수 없습니다.");
+	}
+	
+	function reportClick(){
+		//alert("자신의 상품평을 불량글로 신고하거나 동일한 상품평을 두번 이상 신고할  수 없습니다.");
+	
+			alert("불량글 신고하기를 하려면  로그인이 필요합니다. \n로그인 후  신고해주시기  바랍니다.");
+			goLogin_Ass();   
+			return;
+	
+	}
+
+	function accessmentListReload(){
+	//	$("#customer_comment_inner").load("/displayDetail/listGoodsAssessment.lecs?nolayout=yes&storeNo=22&siteNo=9&goodsNo=UQ31069457&currentPage=1&orderType=" + $("#orderType").val());
+		var url = (parent.document.location).toString();
+		//url = makeUrl(url);
+		location.href = url; //+"&FROM=www#prodReview";
+	}
+	//]]>	
+</script>
+	<script type="text/javascript">
+//<![CDATA[
+	
+	//상품평 목록
+	var oldN = "";
+	function showQna(curN) {
+		if(curN != oldN)	{
+			document.getElementById("reviewtit"+curN).className='tit-on';
+			document.getElementById("review"+curN).className='on';
+			if(oldN != '') {
+				document.getElementById("reviewtit"+oldN).className='tit-off';
+				document.getElementById("review"+oldN).className='off';
+			}
+			oldN = curN;
+		} else if (curN == oldN) {
+			document.getElementById("reviewtit"+curN).className='tit-off';
+			document.getElementById("review"+curN).className='off';
+			oldN = "";
+		}
+	}
+	
+	function show_ly(name,flag){
+		document.getElementById(name).style.display= flag;
+	}	
+	
+	function ajaxGdasWriteForm(target){
+		//var params = $('#gdasWriteForm').serialize();
+		var params = 'goodsNo=UQ31069457';
+		$('#w05').load('/displayDetail/newGoodsPhotoCommentPopup.lecs', params, function(data){
+			openLayer('w05', {center: true, blocker: true});
+			fn_focusLayer_detail(target, 'w05');
+		});
+	}	
+	
+	function getReviewWriteLayer(name, flag, target){
+		
+		alert("상품평을 등록 하려면  로그인이 필요합니다. 로그인 후  상품평을 등록 해주시기  바랍니다.");
+		goLogin_Ass();   
+		return;
+		
+		
+		// ceres-6042 : 상품평 작성 제한
+		var memberNo = "";
+		if(memberNo == "") {
+			alert("상품평을 등록 하려면  로그인이 필요합니다. 로그인 후 상품평을 등록 해주시기  바랍니다.");
+			goLogin_Ass();
+			return;
+		} else {
+			var assCondiParam = "memberNo="+memberNo;
+			ajaxCall("POST", "/displayDetail/memberRightLimitAjax.lecs", assCondiParam, "json", callback = function(result) {
+				if(result){	
+		  			if(confirm("죄송합니다.고객님.\n현재 고객님은 자격정지 회원으로 분류되어, 상품평 작성/수정이 불가합니다.\n자세한 사항은 [확인] 버튼을 클릭해주세요.")) {
+		  				document.location.href = "/display/displayShop.lecs?displayNo=UQ1A09A01";
+		  			}
+				} else {
+					ajaxGdasWriteForm(target);
+					show_ly(name, flag);
+				}
+			});
+		}
+		
+		//ajaxGdasWriteForm(target);
+		//show_ly(name, flag);
+	}
+	
+	function show_photocomment(pageIdx,pos, target){
+		//alert(pageIdx + ' ' + pos);
+    	fn_viewImageGdasInfo(target, pageIdx,pos,'storeNo=22&siteNo=9&goodsNo=UQ31069457&orderType=1&pageIdx='+pageIdx+'&currentPage='+pageIdx);
+	}
+	//]]>	
+	</script>	
+	
+<div id="customer_comment_inner" >
+<input type="hidden" id="lpointMemberUrl" name="lpointMemberUrl" value="https://member.lpoint.com/door" />
+<!-- 201303 테스트 삭제 [D] 의미없는 a 태그 삭제 -->
+<!-- <a name="04"> 201303 수정 [D] id="04" 삭제 </a> -->
+<!--// 201303 테스트 삭제 [D] 의미없는 a 태그 삭제 -->
+<div class="contProd" >
+	<div class="tittype02">
+	<img src="http://image.uniqlo.kr/uq/img/tit_detail_comment.gif" alt="고객상품평" width="150" height="18" class="tit" /><a href="#skipnavi" class="pagetop"><img src="http://image.uniqlo.kr/uq/img/btn_pagetop02.gif" alt="최상단으로가기" width="21" height="21" /></a>
+	<select style="width: 110px;" class="selComp" name="sort" title="고객상품평 정렬">
+		<option value="1"  selected="selected">최근등록일순</option>
+		<option value="2" >상품만족도순</option>
+		<option value="3" >사진상품평순</option>
+	</select>
+	<ul class="linkMore clearfix">
+		<li><a href="#w05" onclick="javascript:getReviewWriteLayer('w05','block', this); return false;"><img src="http://image.uniqlo.kr/uq/img/btn_detail_comment.gif" alt="상품평 쓰기" width="60" height="17" /></a></li>
+		<li><a href="#w01" onclick="click_btn_photoC_view(this); return false;"><img  id="btn_photoC_view" src="http://image.uniqlo.kr/uq/img/btn_detail_comment_list.gif" alt="이미지 상품평 보기" width="100" height="17"/></a></li>
+	</ul>
+	</div>
+    <script type="text/javascript">
+    //<![CDATA[
+   function orderTypeChange(selectedOrderType){
+      $("#orderType").val(selectedOrderType);
+      $("#customer_comment_inner").load("/displayDetail/listGoodsAssessment.lecs?nolayout=yes&storeNo=22&siteNo=9&goodsNo=UQ31069457&orderType="+selectedOrderType);
+   }               
+    //201303 (D)selectbox plug-in
+    $('.selComp').lotteSelectBox({selectType:'click', linkFunc:orderTypeChange});
+    //]]>
+  </script>
+</div>
+<div class="content">
+
+        
+        
+  			  <form id="formAssessment" name="formAssessment" action="">
+                <input  type="hidden" name="assessmentNo" id="assessmentNo" value="" />
+                <input type="hidden" name="storeNo" id="storeNo" value="22" />
+                <input type="hidden" name="siteNo" id="siteNo" value="9"  />
+                <input type="hidden" name="declareAcceptType" id="declareAcceptType" value="" />
+                <input type="hidden" name="orderType" id="orderType" value="1"  />
+             </form>
+						<table class="cusComTb" id="goodsAssessmentTable" summary="고객상품평 번호, 만족도, 상품평, 등록자, 등록일이 나와있는 표">
+                            <caption>고객상품평</caption>
+                            <colgroup>
+                            	<col width="10%" />
+                            	<col width="12%" />
+                            	<col width="40%" />
+                            	<col width="23%" />
+                            	<col width="15%" />
+                            </colgroup>	
+							<thead>
+								<tr>
+									<th scope="col"  class="tit01" valign="top">번호</th>
+									<th scope="col"  class="tit02" valign="top">만족도</th>
+									<th scope="col"  class="tit03" valign="top">상품평</th>
+									<th scope="col"  class="tit04" valign="top">등록자</th>
+									<th scope="col"  class="tit05" valign="top">등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+            
+                
+                
+                    
+                
+								<tr id="reviewtit1">
+									<td class="txt01" valign="top">20</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(1);return false;">좋아요 자주 입어요</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											mip**************(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2017.01.18</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review1">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">좋아요 자주 입어요<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1092015"   listId="1"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit2">
+									<td class="txt01" valign="top">19</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(2);return false;">얇은 스웨터랑 같이 입으면 좋을거 같아요. 맘에들어요.</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											but****(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2017.01.02</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review2">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">얇은 스웨터랑 같이 입으면 좋을거 같아요. 맘에들어요.<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1088701"   listId="2"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit3">
+									<td class="txt01" valign="top">18</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(3);return false;">가디건 예쁘네요 </a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											mys****(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.12.04</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review3">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">가디건 예쁘네요 <br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1080269"   listId="3"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit4">
+									<td class="txt01" valign="top">17</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(4);return false;">만족합니다</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											sm9**(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.11.30</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review4">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">만족합니다<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1078746"   listId="4"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit5">
+									<td class="txt01" valign="top">16</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(5);return false;">정사이즈 보다 크다는 느낌이 들고, 패브릭이 부드러워 ...</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											lsh**(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.11.19</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review5">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">정사이즈 보다 크다는 느낌이 들고, 패브릭이 부드러워 착용감이 좋아요<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1071597"   listId="5"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit6">
+									<td class="txt01" valign="top">15</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(6);return false;">베이지랑 핑크 2개 삿어용ㅎㅎ작년에 EFM V넥 가디건...</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											ohj***(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.11.11</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review6">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">베이지랑 핑크 2개 삿어용ㅎㅎ작년에 EFM V넥 가디건  사서 잘입고 있어서 이번엔 크루넥! 컬러가 다 예뻐요 두께가 두껍진 않지만 오히려 실내에서는 더 잘 입어지는거 같아요 사이즈는 S삿구요  단추 잠그고 티처럼 입으려고 딱맞게 삿어요 구매하기 전에 매장에서 입어봤는데 M사이즈는 약간 편하게 맞더라구요 (저는 55입어요) S는 딱 보기좋게 맞구요~만족해용^^<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1069182"   listId="6"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit7">
+									<td class="txt01" valign="top">14</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(7);return false;">촉감도 좋고 좋아요 차콜구매했어요 ^^사이즈도 넉넉 </a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											hyo****(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.11.06</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review7">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">촉감도 좋고 좋아요 차콜구매했어요 ^^사이즈도 넉넉 <br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1067041"   listId="7"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit8">
+									<td class="txt01" valign="top">13</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(8);return false;">간절기 가디건으로 강추. 사무실에서 입기 딱 좋은 두께...</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											jhl***(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.11.04</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review8">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">간절기 가디건으로 강추. 사무실에서 입기 딱 좋은 두께감..<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1066287"   listId="8"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit9">
+									<td class="txt01" valign="top">12</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" />&nbsp;<span class="blind">5점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(9);return false;">잘받았습니다.</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											alt**(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.10.21</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review9">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">잘받았습니다.<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1062448"   listId="9"/></a></div>
+									</td>
+								</tr>
+           
+                
+                
+                    
+                
+								<tr id="reviewtit10">
+									<td class="txt01" valign="top">11</td>
+									<td class="txt02" valign="top"><img src="http://image.uniqlo.kr/uq/img/popup/icon_star4_y.gif" alt="별점4점" />&nbsp;<span class="blind">4점</span></td>
+									<td class="txt03" valign="top"><a class="subject" href="#" onclick="showQna(10);return false;">어깨 쪽 찢어져서 온줄도 모르고 사이즈만 입어 보고 택...</a>
+											<!-- 이미지상품평 클릭 추가 -->
+											
+									</td>
+									<td class="txt04" valign="top">
+										
+											sej****(구매자)
+											
+										
+									</td>
+									<td class="txt05" valign="top">2016.10.13</td>
+								</tr>
+
+                
+                
+                
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+                
+                    
+                
+
+								<tr class="off" id="review10">
+									<td class="txt06" colspan="2" valign="top">
+										<img src="http://image.uniqlo.kr/uq/img/txt_price.gif" alt="가격" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_quality.gif" alt="품질" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star1_y.gif" alt="별점1점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_design.gif" alt="디자인" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+										<img src="http://image.uniqlo.kr/uq/img/txt_deli.gif" alt="배송" />&nbsp;<img src="http://image.uniqlo.kr/uq/img/popup/icon_star5_y.gif" alt="별점5점" /><br />
+									</td>
+									<td class="txt07" colspan="3" valign="top">
+										<div class="reImg"><!-- 이미지 들어갈 자리. 불량글 신고에서 불량이미지일 경우 노출안함 -->
+											
+                               				
+                               				
+										</div>
+										<div class="reTxt">어깨 쪽 찢어져서 온줄도 모르고 사이즈만 입어 보고 택도떼고<br/>오늘 입고 나왔네요<br/>새 옷 찢어진것고 안보고 입고온 제 탓이죠 뭐.<br/>
+										<a href="#"    onclick="itemClick(event);return false;"  ><img alt="불량글 신고하기" class="access_btn_report" src="http://image.uniqlo.kr/uq/img/btn_faulty.gif"    assessmentNo="1060396"   listId="10"/></a></div>
+									</td>
+								</tr>
+           
+							</tbody>
+						</table>			
+						<div class="clearfix">
+				        <!-- 페이징 네비게이션 -->
+				        
+
+
+
+
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+    $(document).ready(function() {
+        $("#_firstAjaxGoodsAssessment").click(function(e){
+        	$('#customer_comment_inner').load('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=1&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10');
+        }).css("cursor", "pointer");
+        $("#_prevAjaxGoodsAssessment").click(function(e){
+        	$('#customer_comment_inner').load('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=1&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10');
+        }).css("cursor", "pointer");
+        $("#_nextAjaxGoodsAssessment").click(function(e){
+        	$('#customer_comment_inner').load('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=2&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10');
+        }).css("cursor", "pointer");
+        $("#_lastAjaxGoodsAssessment").click(function(e){
+        	$('#customer_comment_inner').load('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=2&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10');
+        }).css("cursor", "pointer");
+    });
+    _moveAjaxGoodsAssessment = function(url){
+        $('#customer_comment_inner').load(url);
+    };
+    _reloadGoodsAssessment = function(callback){
+    	$('#customer_comment_inner').load('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=1&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10', callback);
+    }
+  //]]>    
+</script>
+<div class="pageNavi_bottom"> 
+
+
+        
+            
+            
+                <div class="pageShift f_right">
+            
+        
+        		<!-- Paging [current=1, itemCount=137, perPage=10, perPageNavi=10]-->
+				
+				
+				
+		                     
+					
+		            
+		                <strong>1</strong>             
+		            
+		            
+		                     
+					
+		            
+		            
+		                <a href="javascript:_moveAjaxGoodsAssessment('/displayDetail/listGoodsAssessment.lecs?nolayout=yes&amp;storeNo=22&amp;siteNo=9&amp;goodsNo=UQ31069457&amp;orderType=1&amp;currentPage=2&amp;itemCount=20&amp;perPage=10&amp;perPageNavi=10')" title="2페이지">2</a>  
+		            
+		        
+		        
+						&nbsp;...
+				
+                
+				
+                
+        </div><!-- /pageShift -->
+
+    </div><!-- /pageNavi -->						
+							<div class="pagerl4_rightBtn">	
+							<a href="#w05" onclick="javascript:getReviewWriteLayer('w05','block', this); return false;"><img src="http://image.uniqlo.kr/uq/img/btn-view-list-01.gif" alt="상품평쓰기" /></a>
+							</div>
+						</div>									
+        
+    
+        
+					<!--E:고객상품평-->
+	<!--[레이어] 상품평 쓰기 -->
+	<div class="layerPopup" id="w05"></div>
+	<!-- //[레이어] 상품평 쓰기 -->
+
+	<!-- [레이어] 불량글 신고하기 -->
+	<div class="layerPopup" id="w02">
+	<div class="wrapPopup">
+			<div class="clearfix">
+				<strong class="popTit"><img alt="불량글 신고하기" src="http://image.uniqlo.kr/uq/img/ttl-popup-02.gif" /></strong>
+					<ul class="popupList">
+						<li>상품평의 취지와 어긋나 공공성을 해치는 글에 대해서는 신고하여 주십시오.</li>
+					</ul>
+					<ul id="w02Rdbox" class="selectList">
+	
+						<li><input type="radio" name="_declareAcceptType" value="1"   id="radio1" /><label for="radio1">업체 및 상품에 대한 비방 내용</label></li>
+						<li><input type="radio" name="_declareAcceptType" value="2"   id="radio2" /><label for="radio2">음란, 욕설 등 부적절한 내용</label></li>
+						<li><input type="radio" name="_declareAcceptType" value="3"  id="radio3" /><label for="radio3">상업적 홍보 및 과대선전</label></li>
+						<li><input type="radio" name="_declareAcceptType" value="4"  id="radio4" /><label for="radio4">타쇼핑몰 및 판매처 홍보</label></li>
+						<li class="clear"><input type="radio" name="_declareAcceptType" value="6"  id="radio5" /><label for="radio5">상품평의 취지에 어긋남(복사글, 해당상품과 무관한 내용 등)</label></li>
+						<li class="clear"><input type="radio" name="_declareAcceptType" value="7"  id="radio6" /><label for="radio6">불량 사진 상품평 (직접 촬영하지 않은 사진 및 해당상품과 무관한 사진)</label></li>
+					</ul>
+					<div class="btnLink">
+						<a href="#prodReview"><img id="access_btn_bReport" alt="불량글 신고하기" src="http://image.uniqlo.kr/uq/img/btn-popup02-01.gif" /></a>
+						<a href="#" onclick="parent.document.getElementById('w02').style.display='none'; return false;"><img alt="불량글 신고 취소하기" src="http://image.uniqlo.kr/uq/img/btn-popup02-02.gif" /></a>
+					</div>
+				<a class="btnClose" href="#" onclick="parent.document.getElementById('w02').style.display='none'; return false;"><img class="btn" src="http://image.uniqlo.kr/uq/img/btn-close.gif" alt="불량글 신고하기 닫기" /></a>
+			</div> <!--/#Popup-->
+	
+	</div> <!--/#wrapPopup-->
+</div>
+    <!-- //[레이어] 불량글 신고하기 -->	
+</div>	
+</div>
+
+  
