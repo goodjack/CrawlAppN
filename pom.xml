@@ -17,7 +17,7 @@
 		<spring.batch.version>3.0.7.RELEASE</spring.batch.version>
 		<cglib.version>2.2</cglib.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<commons-collection.version>3.2.1</commons-collection.version>
+		<commons-collection.version>3.2.2</commons-collection.version>
 		<junit.version>4.10</junit.version>
 		<mybatis-spring.version>1.1.1</mybatis-spring.version>
 		<logback.version>1.1.10</logback.version>
