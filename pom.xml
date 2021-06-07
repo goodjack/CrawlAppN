@@ -20,7 +20,7 @@
 		<commons-collection.version>3.2.1</commons-collection.version>
 		<junit.version>4.10</junit.version>
 		<mybatis-spring.version>1.1.1</mybatis-spring.version>
-		<logback.version>1.1.10</logback.version>
+		<logback.version>1.2.0</logback.version>
 		<org.aspectj-version>1.8.4</org.aspectj-version>
 	</properties>
 
